@@ -1,0 +1,1368 @@
+/*
+The file encoding is UTF-8 without BOM; the newline format is LF
+This file is part of the Jim from Outer Space game.
+Copyright (C) 2007 Daniel Rodriguez Rivero <danielrodriguezrivero@gmail.com>
+Copyright (C) 2026 Nikita Tseykovets <tseikovets@rambler.ru>
+SPDX-License-Identifier: CC-BY-NC-SA-4.0
+*/
+
+:start
+varkill
+pln <h1>Jim del Espacio Exterior</h1>
+pln <div class="bold_centered">© 2007 Daniel Rodríguez Rivero</div>
+pln #/$#/$
+pln Eres Jim, miembro de la Espacio Exterior 1, la comisaría de policía más estrafalaria de toda la galaxia. Tu turno está a punto de terminar cuando el jefe te llama su despacho. El universo te necesita. ¿Estás preparado para aceptar la llamada?
+pln Esta es la versión informática del libro juego al estilo de los clásicos de "Elige tu propia aventura", pero sin ninguna relación con estos, en el que deberás escoger entre distintas opciones para llevar a buen puerto al protagonista y no morir en el intento.
+pln En este juego encontrarás muchas y muy variadas aventuras que podrás vivir con las peripecias del policía más duro de toda la galaxia: Jim, sin apellido conocido por el momento. Visitarás planetas exóticos, amarás a seres que en cualquier otro lugar te harían vomitar y te reirás, o eso espero, con las ocurrencias más estúpidas.
+pln Tú serás el responsable de que termine la jornada de la manera más satisfactoria posible. Te corresponde a ti tomar las decisiones. ¡Buena suerte!
+pln #/$
+pln Basado en la segunda edición: Rodríguez Rivero, Daniel. Jim del Espacio Exterior / Daniel Rodríguez Rivero. — Segunda edición. — D2R Ediciones, octubre 2023. — 141 p. — ISBN 979-8-86297-702-8.
+pln #/$#/$
+pln Portado a UrqW: © 2026 Nikita Tseykovets
+pln El juego cuenta con <a href="https://audionautix.com/" target="_blank">música de Jason Shaw en Audionautix.com</a>.
+pln Esta obra está bajo una licencia <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank">Creative Commons Atribución/Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional</a>.
+btn init, Empezar
+btn comment, Comentario del autor
+btn acknowledgments, Agradecimientos
+end
+
+:init
+soundtrack = "mus/dirt_road_traveler.mp3"
+music = soundtrack
+common = "sound"
+read_marker = "[leído]"
+goto 1
+
+:common_sound
+play snd/flipping_a_book_page.mp3
+if not music then music = soundtrack
+end
+
+:page_number
+if count_#current_loc$ = 1
+_ then pln <h2 class="page_number">#current_loc$</h2>
+_ else pln <h2 class="page_number read_page">#current_loc$ <span class="read_marker">#read_marker$</span></h2>
+end
+
+:intermediate_loc
+if count_#current_loc$ > 1
+_ then return_loc = return_#current_loc$ & proc return_button
+_ else return_#current_loc$ = previous_loc
+end
+
+:final_loc
+music = ""
+music mus/dobro_mash.mp3
+pln #/$<div class="bold_centered">FIN</div>
+return_loc = previous_loc
+proc return_button
+end
+
+:return_button
+btn #return_loc$, ⏪ Volver al #return_loc$.
+end
+
+:1
+proc page_number
+pln - ¡¡Jim levanta tu maldito culo de la silla y ven a mi despacho inmediatamente!!
+pln La voz de tu jefe te saca de un bonito sueño en el que conducías un deportivo por la Interestatal Marciana 49, acompañado de Miss Universo, una acciana con tres generosos pechos entre cuyas ventajas, aparte de las obvias, está la de dar masajes.
+pln Maldices el turno de noche, y con la mente puesta todavía en tan útiles senos, te diriges a ver al teniente Rodgers, el viejo cascarrabias al que llevas aguantando cinco infernales años.
+pln - No te sientes Jim, no quiero que me gastes el cuero de la silla.
+pln Una sonrisa malévola surca su cara. Le gusta ofenderte con ese tipo de sutilezas. Jamás te perdonará el que te acostaras con su mujer, aunque tú creyeras que ese trataba de su hija. ¿Qué culpa tienes de que sea un pervertido amante de las jovencitas?
+pln Te dispones a aceptar con resignación la pequeña humillación pero de pronto recuerdas aquella vez que la profesora Pomfrey te obligó a subir al encerado para leer una nota que ibas a pasar a Patsy Clemens, declarándole tu amor.
+pln Rápidamente la imagen desaparece y recuerdas aquel partido de Blasterball en el que se te cayeron los pantalones cuando ibas a golpear la pelota ante más de 20.000 espectadores. Y entonces dices basta.
+pln Estas harto de que te humillen. ¿Será esta la gota que colme el vaso?
+btn 2, Si agarras la silla y se la rompes en la cabeza al teniente, atízale fuerte en el 2.
+btn 3, Si lo dejas pasar y te abstraes rememorando un desfile de patitos cruzando la carretera camino del lago, deja que la bondad y el amor te inunden en el 3.
+end
+
+:2
+proc page_number
+pln Tu mente se nubla al instante y únicamente puedes pensar en matar a la persona que tienes enfrente. Sujetas con tanta fuerza la silla que tus nudillos palidecen. La alzas por encima de tus hombros y con un rápido movimiento que el viejo Rodgers ni siquiera intuye, se la rompes en la cabeza. Con un crujido seco se parte en varios trozos; la silla, la cabeza se la partes en dos simplemente.
+pln Poco a poco, vuelves en ti y contemplas perplejo el cuerpo inerte de tu superior tumbado sobre la mesa. Tras comprobar si tiene pulso y algo de dinero en la cartera, certificas que está muerto. No lleva mucho encima, 200 sickles y una pistola láser. Algo es algo.
+pln Decides escapar antes de que los trabajadores del primer turno vuelvan. Suerte que es Navidad y que la comisaría está desierta. Aún no sabes dónde ir, pero lo que está claro es que tienes que salir de allí echando leches. Vas al garaje a por un vehículo.
+pln Solo quedan dos.
+btn 4, Si coges la Harley del detective Crochet, rememora tu juventud rebelde en el 4.
+btn 5, Si tomas prestada la vieja ranchera del sheriff Lobo, hazle un puente en el 5.
+proc intermediate_loc
+end
+
+:3
+proc page_number
+pln Aquellas clases de meditación, a las que te apuntaste para ligar con atractivas maduras aburridas de la monotonía de sus matrimonios, han surtido efecto. Concentras tu mente en un lugar muy lejos de allí: un pequeño bosquecillo donde los animales conviven en armonía, las ninfas de Oculas cantan sus lamentos y...
+pln - ¡¡¡Vuelve en ti, cojones, No tengo toda la noche!!!
+pln Desde luego el teniente es único para despertar a la gente.
+pln - Como te estaba diciendo antes de que se te pusiera cara de gilipollas, el ranger de la colonia del planeta Klam nos ha pedido ayuda. Por lo visto hay evidencias de que la mafia local está traficando con objetos antiguos no catalogados.
+pln - ¿Cómo que no catalogados? Se supone que hasta las canicas con las que jugaba Ammon-Ra lo están -, preguntas extrañado.
+pln - Últimamente se han estado realizando excavaciones en el planeta y se rumorea que han encontrado algo que no esperaban. Un oso polar con un collar o algo por el estilo Así que coge el primer transbordador con destino a Klam e investiga un poco.
+pln - A sus órdenes, mi teniente.
+pln Con aire marcial abandonas la oficina. El estómago te ruge demasiado como para no hacerle caso.
+btn 6, Si te vas a desayunar pasando de todo, hay un restaurante muy apañado en el 6. Y recuérdame que jamás confíe en ti para una tarea importante.
+btn 7, Si obedeces las órdenes como un soldado alemán y te olvidas de saciar tu apetito, continúa en el 7 <span lang="de">mein herr</span>.
+proc intermediate_loc
+end
+
+:4
+proc page_number
+pln Te ajustas los cascos y te pones las gafas de sol. Está a punto de amanecer. Te miras en el espejo retrovisor. Si no fueras heterosexual y hubieras nacido en el planeta Bai, te enrollarías contigo mismo.
+pln Derrochando magnetismo animal, te incorporas a la circulación. Atrás queda ese insignificante asesinato que acabas de cometer. Decides no coger la autopista, será el primer sitio donde empezarán a buscarte, así que te pierdes entre las innumerables callejuelas que vertebran la ciudad.
+pln Durante varios minutos conduces sin rumbo fijo entre almacenes abandonados e imponentes rascacielos imposibles de abarcar con la vista, hasta que el sonido lejano de una sirena te pone en alerta.
+pln Tienes que huir del planeta lo más rápidamente posible. Solo hay dos formas de hacerlo.
+image img/1.jpg|Panorama de una ciudad futurista
+btn 10, Si decides arriesgarte e ir al puerto espacial, conduce hasta el 10.
+btn 11, Si prefieres el anonimato de un vuelo clandestino, dirígete al 11.
+proc intermediate_loc
+end
+
+:5
+proc page_number
+pln Te acomodas en el asiento de cuero y arrancas el motor. El suave ronroneo te relaja hasta hacerte olvidar lo que has hecho. Sales del aparcamiento de la comisaría y te incorporas a la autopista.
+pln Está amaneciendo y pronto los veinte carriles se verán inundados por jubilados que van a cobrar la pensión en su descapotable, amas de casa histéricas que llevan a los niños a la prisión y hippies trajeados que conducen su BMW simplemente para fardar.
+pln No será una situación ideal para escapar. Pisas el acelerador hasta que te duele el pie. Al llegar a una intersección ves que el semáforo se pone en rojo.
+pln No hay ningún vehículo en kilómetros a la redonda pero aun así dudas si saltártelo.
+btn 8, Si decides hacerlo, cometiendo una infracción grave que te quitará 5 puntos del carné, y te quedan solo 3, mete a fondo en el 8.
+btn 9, Si decides respetarlo, como a tu prima Astrud en la reunión familiar de hace unos años, frena en el 9.
+proc intermediate_loc
+end
+
+:6
+proc page_number
+pln No nos engañemos, entraste en la policía espacial huyendo de la misma policía. Tu lealtad al cuerpo no está fuera de toda duda y entre tus prioridades no está trabajar, al menos mientras tengas hambre.
+pln Afortunadamente, a dos pasos de la comisaría hay un <span lang="en">Ohio Fried Chicken</span> donde hacen el mejor soufflé de coñac del barrio.
+pln Acaban de abrir y en el local únicamente está la camarera: una rubia de ojos verdes que parece dispuesta a todo. Pasas de comer e intentas ligártela, tu prioridad número uno desde que te levantas de la cama, hasta que vuelves a ella, preferiblemente acompañado.
+pln Cuando ya estás a punto de conseguir que ponga el cartel de "Cerrado" en la puerta, esta se abre bruscamente. Tres atracadores irrumpen en el establecimiento armados con escopetas recortadas.
+pln Tras preguntarte cómo puede haber alguien tan estúpido como para atracar un restaurante de comida rápida a primera hora de la mañana, decides que tienes que actuar.
+btn 12, El miedo hace que te comportes como un soldado francés, tiembla en el 12.
+btn 13, Si intentas detener a los ladrones, ármate de valor en el 13.
+proc intermediate_loc
+end
+
+:7
+proc page_number
+pln Con el consuelo de que, aunque hambriento, al menos conseguirás los suficientes puntos de viaje como para irte de vacaciones gratis a Venus Ville, te diriges al puerto espacial Helen Thomas, el primer aeropuerto convencional reconvertido pocos años después de que se dominaran los viajes espaciales a través de agujeros de gusano.
+pln Un hervidero de gente: turistas despistados, comerciantes con poco dinero y terroristas islámicos, abarrota los pasillos, nada que no se solucione con unos disparos al aire. Al instante, como Moisés ante el Mar Rojo, la marea de gente se divide en dos, dejándote el camino expedito hacia tu nave.
+pln Dejas que la azafata ate tu cinturón mientras la cabina empieza a vibrar. La voz del comandante crepita en el altavoz.
+pln - Espero que tengan un buen seguro de vida, vamos a despegar en 5, 4, 3, 2, 1 ¡¡¡Arre buuuuurra!!!
+pln Ese último comentario no te tranquiliza nada.
+btn 14, Si te encomiendas a san Cristóbal, reza en el confesionario 14.
+btn 16, Si te encomiendas a san Cucufato, esperemos que te escuche en el cielo 16.
+proc intermediate_loc
+end
+
+:8
+proc page_number
+pln Acabas de matar a un hombre, lo que menos te preocupa es saltarte un semáforo. Por desgracia, la desvencijada ranchera está equipada a la última: sistema de preservación de la vida en caso de accidente, GPS, conducción automática, asientos abatibles y una pegatina que dice: "Papá, no corras" de la cual sale un rayo que te paraliza al detectar que has infringido la ley.
+pln Apenas sientes nada cuando te estrellas contra el muro de una fábrica de profilácticos. Una muestra más de que el crimen no paga.
+pln Recuerda, Roger Moore dice: No tengas hijos, luego te llenarán el coche de pegatinas asesinas.
+btn 93, Ve al 93.
+proc intermediate_loc
+end
+
+:9
+proc page_number
+pln Ya has cometido suficientes crímenes, no quieres añadir uno más a la lista. Como un buen ciudadano, esperas a que el semáforo se ponga en verde. Antes de que puedas pisar el acelerador, un meteorito cae sobre la ranchera, dejando un pequeño cráter en su lugar.
+pln En alguna parte, el gran jefe de policía que controla el universo enfunda su revolver humeante y añade una muesca a la nacarada culata. Se ha hecho justicia.
+pln Una muestra más de que el crimen no paga. Recuerda, Mr. T. dice: Odio que Roger Moore plagie mis consejos.
+proc final_loc
+end
+
+:10
+proc page_number
+pln Rezas para que no hayan descubierto el homicidio. Pese a que es temprano, la terminal del puerto espacial está hasta los topes. Te abres paso a codazos entre la gente y le robas el pasaporte y el billete a un tal Ronnie Caruso, comerciante de persianas autoenrollables. Aprovechas para meterle unas pastillas que encontraste en los lavabos de un colegio de monjas durante una redada, días atrás.
+pln Mientras la policía detiene al verdadero Ronnie por tenencia ilícita de caramelos de regaliz negro, ocupas su asiento en el transbordador con destino a Klam, un lugar habitado por un puñado de colonos, perfecto para esconderse una temporada.
+pln La nave despega y en el monitor de tu asiento se anuncia la proyección de una película.
+btn 17, Si decides dormir, recuéstate en el asiento 17.
+btn 18, Si te quedas viendo el film, reza para que no sea una de Kenneth Branagh en la taquilla 18.
+proc intermediate_loc
+end
+
+:11
+proc page_number
+pln Mejor no coger ningún medio de transporte convencional. Después de haberte pateado las calles tantos años conoces a muchos que te podrían sacar del planeta inadvertidamente.
+pln Con lo que no contabas es con que se negaran a llevar como tripulante a un madero y mucho menos a un madero asesino, así que tras varias horas regateando infructuosamente con la escoria del universo solo te queda una opción: Pitt Ojovago, un pirata venido a menos que se dedica actualmente al negocio de la importación-exportación de sellos psicotrópicos.
+pln Has quedado con él en un pub irlandés cercano al puerto espacial; aunque está repleto de viajeros de todos los confines del universo, no es difícil encontrarle; el sombrero pirata, el parche en el ojo izquierdo adornado con una diana y el loro en el hombro ayudan bastante.
+pln Escucha pacientemente tu historia mientras apura una jarra de brog, grog con aceite de ricino extra.
+pln - Así que quieres que te lleve conmigo ¿eh? -. Dice cuando terminas -. Bien, no quiero tener más problemas de los necesarios con la autoridad... pero le has caído bien a Piquito
+pln El loro te guiña un ojo. Podrás embarcar si respondes a este acertijo, susurra Pitt: ¿Por qué?
+btn 29, Si en un alarde de ingenio respondes 25, ve al 29.
+btn 25, Si respondes: "¿Por qué no?", salta al 25.
+btn 23, Si no se te ocurre otra cosa mejor que decir que: "Porque sí", dirígete al 23.
+proc intermediate_loc
+end
+
+:12
+proc page_number
+pln En cuanto ves el brillo del sol reflejado en el cañón de la escopeta que empuña uno de los atracadores, te zambulles debajo de una mesa gritando como un castrato en un harén. Tus gritos irritan al jefe de la banda que, para tu desgracia, el día anterior ha sido operado del oído y está aún convaleciente.
+pln Ni siquiera te amenaza para que te calles, eso solo pasa en las películas y esto es una historia ficticia novelada. Sientes cómo algo duro atraviesa tu pecho perforándolo de un extremo al otro. Es una bala. No va a ser una llave inglesa, claro.
+pln Lo último que ves son los innumerables chicles que se agolpan bajo la mesa tomando la forma de un rostro que, burlón, se ríe de ti.
+proc final_loc
+end
+
+:13
+proc page_number
+pln Sopesas la situación fríamente. Solo son tres, sus armas son del siglo pasado y de la oreja de uno de ellos pende una etiqueta en la que se puede leer "Hospital Psiquiátrico de Cornwell". No parecen unos tipos muy avispados.
+pln Te las has visto en peores situaciones, como aquella vez en Venecia, rodeado de 20 zombis de los que te deshiciste con solo 14 balas. Fue la mejor partida del "<span lang="en">House of the Dead</span> 3000" de la historia.
+pln Es hora de hacerle entender a los malos que nadie se mete con Jim habiendo una chica a la que se puede ligar de por medio. Te aseguras de que la camarera esté segura bajo la barra y te diriges al atracador más cercano a ti.
+pln - Eh, cuchufleta - dices en voz baja para no llamar la atención del resto de delincuentes.
+pln - ¿Qué?
+pln - Tienes abierta la bragueta. La rima es parte del espectáculo.
+pln Consigues confundir al ladrón, lo que aprovechas para hacerte con su arma. De 34 certeros disparos consigues poner en fuga a los atracadores. La camarera te demuestra su agradecimiento de una forma que tiene que ser codificada.
+pln Tras dos horas de placenteras sensaciones, te vistes para continuar con el caso. En ese momento la lengua de Susie sale disparada dos metros y coge un pedazo de pastel que reposaba sobre la barra del local.
+pln - Quédate conmigo- te dice mientras saborea el dulce - hay cosas que no te he enseñado… todavía.
+pln Tu imaginación se dispara, buscando formas de aprovechar el don que acabas de presenciar.
+btn 31, Si te da repelús estar con alguien que tiene un miembro flácido más largo que el tuyo, huye de la habitación por la ventana 31.
+btn 33, Si la sangre te baja por debajo de la cintura y te quedas con Susie, agárrate los machos en el 33.
+proc intermediate_loc
+end
+
+:14
+proc page_number
+pln San Cristóbal se estaba ligando a una chavala en el momento de tu plegaria, pero la experiencia es un grado y salvo la desagradable compañía de un bumpy babeante que insiste en contarte su, a todas luces, espuria vida, el viaje transcurre sin problemas.
+pln Llegas al planeta Klam, un polvoriento y atrasado lugar en el que hay poca vegetación, poca vergüenza y mucho Mimidium, el oro rosa, como lo llamaron los primeros colonos que descubrieron sus propiedades afrodisíacas; un mineral presente allá donde poses la vista.
+pln Lo primero que haces es dirigirte a las oficinas del ranger local. Alguien duerme en su despacho.
+pln - Perdone, ¿es usted el que manda por aquí? - gritas con todas tus fuerzas al oído del pobre dormilón.
+pln - Eh, no. - Resulta que no estaba durmiendo el tipo después de todo porque ni siquiera se ha sobresaltado. - El señor Chuk está en una misión en estos momentos. Yo soy su ayudante Fuss.
+pln Chuk... ese nombre te trae recuerdos de antiguas historias sobre un ejército de clones defensores de la ley que se rebelaron... Pero no puede ser.
+pln - ¿No me estará diciendo que el ranger es un Chuk-1000?
+pln - Sí, ya no se ven muchos, ¿verdad? Pero no se preocupe, este no es peligroso, jamás se ha cortado el bigote. ¿Quién pregunta por él?
+pln Fuss te mira de arriba abajo con su ojo biónico, lo que te hace sospechar que lleva incorporado un escáner biométrico, o eso o será mejor que nunca te agaches a recoger una pastilla de jabón ante él.
+pln No quieres arriesgarte a que eso ocurra, así que te vas, pero antes escondes tu tarjeta en el escritorio del ranger Morris. No te hace falta leer su placa para saber que se apellida así.
+pln No tienes pistas, no tienes ni idea de por dónde empezar, pero lo que sí tienes es ganas de ir al lavabo. Intentas usar el baño de un par de establecimientos pero su política de consumir antes de usar te impide hacerlo. Nunca has pagado por cambiarle el agua al canario y no vas a empezar ahora.
+pln Ya estás buscando con la mirada algún seto que te cubra de las miradas masculinas ajenas, cuando ves a lo lejos un sex-shop con un letrero enorme que dice: "<span lang="en">The Twin Tits</span>" y hacia allí te diriges.
+pln El amable dependiente te permite usar su servicio sin tener que comprar nada, pero ya que estás decides echar una ojeada a la mercancía.
+btn 28, Si te decantas por mirar las revistas, que no te pille el dependiente que no estás en una biblioteca sino en el 28.
+btn 26, Si decides comprobar la textura de esa muñeca hinchable que se parece tanto a tu ex-mujer, tócala con más delicadeza en la zona erógena 26.
+proc intermediate_loc
+end
+
+:16
+proc page_number
+pln A saber cómo habrá llegado a tus oídos la existencia de tan cacofónico santo. Desgraciadamente, Cucufato está pasando unos días en el spa de los Campos Elíseos. Los auténticos, no el centro comercial que tienen los franceses. Para cuando le llega tu petición de ayuda, ya te has comido el pudin de bellotas que servían en el transbordador.
+pln Eres evacuado en una cápsula médica al hospital más cercano. Saldrás recuperado de la indigestión cuatro meses después, para conocer que has sido expulsado del cuerpo por acumulación de faltas de asistencia.
+pln Desesperado y sin estudios superiores, te harás fontanero y ganarás el suficiente dinero como para ser considerado atractivo por gran parte de las chicas.
+pln Vivirás una vida plena y feliz, hasta el último día de trabajo antes de la jubilación. Una tubería explotará ante tus narices y se te clavará en la frente. Harto de las burlas de los que te rodean, te retirarás a una cueva en una montaña perdida a meditar sobre la belleza.
+image img/2.jpg|Paisaje montañoso
+proc final_loc
+end
+
+:17
+proc page_number
+pln Te colocas lo mejor posible la almohada y pronto caes rendido. No tardas en despertarte sobresaltado. Una atractiva morena ha derramado su café sobre tu entrepierna. La chica se afana en limpiarte, francamente consternada. No hace falta intercambiar palabra alguna cuando nota cómo tu misil se coloca en la rampa de lanzamiento para un despegue inmediato.
+pln Rápidamente os metéis en el lavabo. Os desnudáis con salvaje pasión. Tras probar sus jugos, te susurra al oído: "Te quiero dentro de mí". Se te nubla la vista y te dispones a hacerle ver las estrellas.
+btn 20, Si la coges a horcajadas, espero que tengas buenos brazos en el 20.
+btn 19, Si te decantas por la postura del "perrito", deja de ver pelis porno sudamericanas en el 19.
+proc intermediate_loc
+end
+
+:18
+proc page_number
+pln Tienes suerte, emiten tu película favorita: Sonrisas y lágrimas, la versión que hizo Van Damme allá por el 2024. En un intermedio ves a una atractiva morena que viene hacia ti con aire despistado y un vaso en la mano. Te sientas bien antes de que tropiece con tu pie, pero no vale de nada porque dos filas más atrás choca contra otro tipo derramando sobre él gran parte del contenido del vaso. Misteriosamente los dos desaparecen en el servicio. ¿Qué irán a hacer en ese espacio tan reducido?
+pln El vuelo llega a su fin tras un viaje con algunas turbulencias. Apenas un par de personas descienden de la lanzadera.
+pln En la terminal no se ve un alma. Nunca has estado en ese lugar por lo que decides deambular por los alrededores en espera de que ocurra algo que guíe tus pasos hacia emocionantes y eróticas aventuras.
+pln Al girar una esquina distraídamente, chocas con alguien. Cuando dejas de ver pajaritos piando alrededor de tu cabeza, ves cómo un tipo con el pelo extrañamente verde recoge un paquete del suelo mientras te dirige una sarta de improperios en Kladish, idioma semi-universal que conoces lo suficiente como para intuir que el paquete es más valioso que tu vida
+pln La cosa no va a mayores gracias a la pronta actuación de un guarda de seguridad que volvía de tomarse un café. Enfurruñado, el desconocido se aleja.
+pln Te pierde la codicia y la curiosidad por saber qué llevaba el tipo en ese paquete.
+btn 21, Si sigues disimuladamente al hombre del pelo verde, ocúltate bien de su vista en el seto 21.
+btn 22, Si te intriga más qué clase de chicas viven en ese lugar, ve a darte una vuelta por la ciudad en el 22.
+proc intermediate_loc
+end
+
+:19
+proc page_number
+pln La embistes sin parar una y otra vez. Ella te pide más y más. Aumentas el ritmo, estás a punto de explotar, ni siquiera sientes los golpes que te das con las paredes del minúsculo habitáculo.
+pln Las arremetidas son cada vez más fuertes. La chica se retuerce de placer mientras la pequeña cabina parece estar dando vueltas y más vueltas.
+pln Estás tan excitado que no percibes el choque de la lanzadera contra el suelo debido a las turbulencias creadas por vuestra juerga en el servicio.
+pln Al menos mueres como siempre quisiste, tirándote a una tía y con la certeza de que tienes una potencia sexual capaz de derribar una nave espacial.
+proc final_loc
+end
+
+:20
+proc page_number
+pln La apoyas contra la pared. Tus fuertes brazos, resultado de horas practicando sexo en solitario, por suerte eres ambidiestro y no sufres de descompensación muscular en las extremidades como los fans de Star Trek, pueden con su cuerpo, pero apoyándola es más sencilla la penetración.
+pln Lentamente empieza a cabalgar sobre tu miembro, se agarra al pomo de la puerta para facilitar el movimiento, con tal mala suerte que, como resultado de una salvaje embestida, la puerta se abre de golpe cayendo los dos por la inercia en el pasillo totalmente desnudos, ella con sus globos aerostáticos y tú con la baliza de señalización apuntando a una monja de la segunda fila que cae desmayada al instante ante esa pecaminosa y desproporcionada visión.
+pln Eres detenido por escándalo público. La religiosa tenía influencias en las más altas esferas. Pasas cuarenta años en prisión rumiando tu venganza contra la monja. Cuando por fin sales, lo primero que haces es salir en su busca.
+pln La encuentras un día, visitando las cataratas del Niágara. Te acercas sigilosamente por su espalda dispuesto a empujarla, pero de pronto cae un rayo que te convierte en cenizas, desperdigadas por el viento a los cuatro rincones del mundo.
+pln Has aprendido la lección de la peor manera: nadie se mete con una monja y vive para contarlo. ¡¡¡Asesino!!!
+proc final_loc
+end
+
+:21
+proc page_number
+pln No te es muy difícil seguir la pista del tipo. No hay muchos humanoides de pelo verde y rabo retráctil andando por la terminal.
+pln En el garaje, una neo-berlina le está esperando con el motor encendido. Necesitas encontrar un vehículo cuanto antes o se te escapará. Recorres una fila de coches tras otra. La neo-berlina ha salido ya del aparcamiento. La persigues hacia la calle y paras el primer coche que intenta atropellarte.
+pln La jubilada que lo conduce se muestra cooperativa. El típico: "Policía, siga a ese coche" funciona aunque lo que le muestres sea el carné de socio del Atlético Aviación y no tu placa.
+pln Tras recorrer varias manzanas, el coche del sospechoso de pelo verde se detiene ante un sex-shop.
+btn 39, Sales del coche y entras en la tienda, en el 39.
+btn 40, Si permaneces a la espera, compra café y rosquillas y vigila en la calle 40.
+proc intermediate_loc
+end
+
+:22
+proc page_number
+pln El puerto espacial está en el centro de una pequeña ciudad llamada Tymosh. No parece que estén muy avanzados, apenas hay un par de bares y tres sex-shops en la calle principal.
+pln Te diriges hacia uno de ellos, atraído por una sugerente androide de placer que se exhibe en el escaparate. Solo cuesta 30.000 seckles, lástima que no tengas un solo parsel. Sopesas la situación mientras la androide contonea sus caderas frente a ti. La noche se acerca y puede ser muy fría.
+pln No quieres morir congelado y la hospitalidad local parece brillar por su ausencia. Solo hay una forma de dormir caliente, así que entras en la tienda dispuesto a negociar con el dependiente.
+btn 36, Si pasas de gastar saliva y robas a la androide, El Vaquilla estaría orgulloso de ti, ve al 36.
+btn 34, Si intentas convencer al dependiente de que te deje probar a la androide, aprovecha tu labia en el 34.
+proc intermediate_loc
+end
+
+:23
+proc page_number
+pln Le respondes con un desprecio por la vida y una chulería propia de un miembro de la legión borracho como una cuba. Consigues dejar pasmado al loro de Pitt.
+pln - Cojones, Jim, es la mejor respuesta que me han dado nunca. ¿Te interesa un puesto en mi barco? - Escupe en su mano y te la ofrece.
+pln Jamás entenderás esas asquerosas costumbres piratas. Por un instante te lo piensas: no tienes donde ir, eres un fugitivo de la justicia y varias mujeres te buscan para que te hagas una prueba de paternidad.
+pln Con un fuerte apretón mano-garfio, ni loco hubieras tocado el escupitajo de Pitt, cerráis el trato. Durante los próximos dos años formarás parte de la tripulación del "<span lang="fr">Tré Jolie</span>".
+pln Los primeros meses pasan rápidamente entre saqueos, destrucción, fiestas del pijama y pillaje, que es como el saqueo pero sin violencia. Pero todo aburre con el tiempo y un día decides presentar tu renuncia.
+pln Antes de que puedas despedirte de tus compañeros, te dejan abandonado en un planeta desconocido que no aparece en las cartas estelares, cuyo suelo sembrado de huesos no te hace presagiar nada bueno.
+pln Decides dar una vuelta por los alrededores. Del suelo yermo apenas se elevan unos cuantos matorrales. Tras un monte con forma de calavera, aparece un imponente edificio rodeado de columnas de estilo jónico. Sí que sirvió de algo aprender esa chorrada en la escuela.
+pln En el dintel se puede leer: "Que no entre el que no sea telépata". No lo eres, pero una simple advertencia nunca te ha achantado. La ovalada cicatriz de tu trasero así lo confirma. Además, antes de que te abandonaran bebiste varias jarras de grog y la naturaleza llama.
+pln Cuando vas a cruzar el umbral, un grito proveniente de las profundidades del edificio te detiene.
+pln - ¿Quién osa a perturbar mis dominios?
+pln Es la voz más hermosa que has escuchado nunca, por mucho que haya gritado.
+pln - Soy Jim, ex-policía, ex-corsario y ex-torsionador jajajja. Este chiste es mío.
+pln - Y bien, Jim, ¿no sabes leer? Solo está permitida la entrada a los telépatas.
+pln - ¿Quién te dice que no lo sea?
+pln - NO eres telépata. Tiene su razón de ser el que no puedas entrar aquí, ¿sabes? No es que me divierta coger el cincel y pasarme cuatro horas picando en la piedra para escribir ese mensaje. Mi morada está llena de espejos y si entras y dices cualquier cosa, aunque sea en susurros, los destruirás todos y tendrás 3415 años de mala suerte. Mi conciencia no podría soportarlo. Y tampoco quiero que me venga un abogado pidiendo daños y perjuicios para su cliente.
+pln - ¿Entonces el grito de antes? Y tú estás hablando ahora.
+pln - Yo SÍ soy telépata, así que lárgate ya o soltaré al fiero Baschuk. A dos días de viaje al oeste de la montaña de la calavra hay una pequeña colonia minera, allí te darán trabajo.
+image img/3.jpg|Montaña de la calavra
+btn 44, Si partes en busca de los mineros, ponte en marcha en el 44.
+btn 46, Si decides averiguar quién es la dueña de tan bella voz, atrévete a investigar en el 46.
+proc intermediate_loc
+end
+
+:25
+proc page_number
+pln Os enzarzáis en un interrogatorio que dura horas. Cuando por fin llegáis a la conclusión de que "igual de otra forma sí", la cabeza te duele tanto que te vas a dormir al primer motel que encuentras.
+pln Al día siguiente, te despiertas a bordo de una nave-factoría asiática en la que pasarás los próximos cuatro años fabricando carteras Gucci de imitación. Lo peor de todo es que nunca sabrás por qué.
+pln Para saber cómo llegó allí Jim, manda un SMS con la palabra quecoñohapasao al 4334.
+proc final_loc
+end
+
+:26
+proc page_number
+pln Es increíble el realismo de la muñeca. Si desenfocas la mirada no podrías distinguirla de Mariah, tu ex-mujer.
+pln A tu cabeza afluyen los buenos momentos que pasaste con ella, todos en la cama. Y mientras cierras los ojos vas recorriendo el detallado cuerpo de látex buscando avivar los recuerdos: Aquella vez en el parking del restaurante, cuando después de cenar no pudisteis refrenar la pasión. Ella te cogió del hombro y te diste la vuelta para besarla.
+pln Casi puedes sentir su mano sobre tu hombro, te das la vuelta y antes de que puedas besar al barbudo que tienes enfrente, este te detiene con una pequeña palmada en la frente.
+pln - Tranquilo, amigo, no querrá morir de placer, ¿verdad?
+pln Otra vez has vuelto a confundir la fantasía con la realidad, como aquella vez con las gemelas Appleton. Rojo de vergüenza, te disculpas.
+pln - No importa, puede pasarle a cualquiera, a mi suelen querer besarme todos. Usted debe ser el agente Jim, ¿no es así? Yo soy el ranger Morris. Mi ayudante le envía recuerdos.
+pln Al estrecharle la mano sientes que estás ante el ser más poderoso del universo. En unos minutos te pone al corriente del caso. Hace unas semanas detuvo a unos rateros con varios objetos antiguos no clasificados. No le dijeron de qué lugar provenían porque eran meros secuaces, pero le pusieron tras la pista del mafioso local: un terrestre llamado Zipple, dueño de la "Esclavo 1", la discoteca más concurrida de todo el puerto deportivo de Tymosh, la ciudad donde, por si no lo sabías, has aterrizado.
+pln Os vais de compras y por la noche, vestidos como manda la ocasión: pantalones de campana, chaleco y tupé, entráis en la disco. Atravesáis la atestada pista de baile, lo que aprovechas para meter mano a varias chicas, hasta llegar a la zona VIP.
+pln Allí, sentados en un semicírculo, se reúne la créme de la créme del crimen organizado. En el centro dormita un gigantesco caimán. El ranger Morris te los va presentando uno a uno.
+pln En primer lugar, el gordo Alberto, un afro-klamiano enorme, hinchado como un zeppelín. A su lado Rizzo, un ser con el pelo verde que pese a su apariencia humana algo te dice que no lo es; luego el propio Zipple.
+pln A primera vista parece un oficinista: escuchimizado, con gruesas gafas de pasta negra del mismo color que su desastroso pelo. Al resto de los criminales no los nombra, no son importantes y además parecen estar demasiado borrachos.
+pln Chuk te pide que vayas a por una cerveza mientras él intenta sonsacar algo a Zipple. Para cuando vuelves tras haberle quitado un par de birras a un robot camarero con forma de supositorio, no sabes cómo se las ha arreglado, pero te encuentras al cocodrilo convertido en un juego de zapatos, cinturón y bolso, a los borrachos directamente K.O. y a los supervivientes, enzarzados en un tiroteo con Morris, que les escupe de vuelta sus balas.
+pln Cuando te ven aparecer, los mafiosos huyen en desbandada. El gordo Alberto choca contra Chuk y cae sobre este inmovilizándolo.
+pln - ¡¡Sigue a Zipple!!- son sus últimas palabras antes de desaparecer bajo el orondo cuerpo del mafioso.
+btn 65, Si persigues a Zipple, corre tras él en el 65.
+btn 66, Si prefieres seguir tu instinto, quédate con Chuk en el 66.
+proc intermediate_loc
+end
+
+:28
+proc page_number
+pln Entre las decenas de publicaciones con torsos, y lo que no son torsos, desnudos, te llama la atención una en cuya portada se ve plasmada la foto de una chica vestida.
+pln Al fijarte mejor te das cuenta de que se trata de Mariah Zuley, la rubia cantante terrestre con voz de vulcaniana de la que eres un gran fan. Jamás olvidarás aquella actuación en la que, mientras cantaba con gran efusividad, estuvo a punto de salírsele un pecho.
+pln Le echas una ojeada a la publicación y con gran alborozo te enteras de que en unas horas dará un concierto en exclusiva en el Arena Stadium de Klam. No puedes faltar, a tomar por saco la misión. Ya se te ocurrirá alguna excusa, como que había un atasco o que tu perro se comió tu placa.
+pln Solo hay un problema, no tienes ni idea de dónde se encuentra el estadio. El dependiente te informa de que está a más de 150 km., algo lejos para ir sin vehículo de transporte, pero tienes buenas piernas...
+btn 69, Si haces autostop pese a no haberte depilado las piernas ese día, cuidado con los psicópatas en la colina 69.
+btn 71, Si te vas andando, echa de menos un bonobús en la carretera 71.
+proc intermediate_loc
+end
+
+:29
+proc page_number
+pln - Por el culo te la hinco, jajajaja - las carcajadas de Pitt y su loro centran la atención de los parroquianos. - No estoy falto de dinero. No me hace falta lo que me ofreces, pero si hay algo de lo que carezco es de gente de la que reírme, como tú. Preséntate mañana a las 0701 horas en el almacén de la calle Rautta. Sé puntual o te dejaremos en tierra.
+pln El resto de la noche transcurre entre vodkas con hielo y Manhattans.
+pln A la hora acordada estás en la puerta del almacén más borracho que una cuba.
+pln - ¡¡¡Tuertoooo!!! ¡¡¡Tuertoooo!!! - tus gritos resuenan entre las grandes naves del complejo industrial pero la puerta del almacén no se abre.
+pln Pruebas entonces a darle golpes.
+pln - ¡¡¡Tuerto!!! - un golpe.
+pln - ¡¡¡Tuertooooo!!! - otro golpe aún más fuerte.
+pln - ¡¡¡Tuertoooooooooo!!!
+pln El último golpe va a parar contra el pecho de un osboriano de tres metros, más musculado que la unión contranatura de Stallone y Schwarzenegger, los últimos presidentes de los USA antes de que Wal Mart comprara el país.
+pln - ¿Quién osa golpearme? - pese a no haber abierto la boca, escuchas perfectamente su ronca voz. ¿Será telepatía o que le estás mirando el ombligo?
+btn 41, Si decides hacerte pasar por una de las vendedoras de Avon, pon tu mejor sonrisa y saca tus productos en el 41.
+btn 42, Si te identificas como el grandioso Jim Garrison temor de los setecientos mares estelares, deja de hacerte el fantasma en el 42.
+proc intermediate_loc
+end
+
+:30
+proc page_number
+pln - Me siento muy halagado Señora Collins y, créame, si tuviera setenta años más y no viviera en la mansión Playboy satisfaría su deseo, pero no me gustaría que me condenaran por gerontofilia.
+pln - Jimmy, el año que viene dejaré de ser fértil y quiero un hijo como sea. ¿Entiendes? ¡Como sea!
+pln No te gusta el tono de ese último "Como sea" y comprobar que te apunta con un rifle blaster te provoca un cierto recelo hacia su persona.
+pln - Y ahora aparca el coche junto a ese cactus.
+pln Una vez has estacionado, te golpea la cabeza con la culata del fusil y caes inconsciente.
+pln Te despiertas en una cabaña rústica, atado de pies y manos a una pequeña cama. Intentas liberarte pero los nudos son muy resistentes, al menos la cuerda es de nylon. La cabeza te duele todavía. No sabes a ciencia cierta cuánto has pasado inconsciente pero ha debido de ser bastante porque a través de una ventana puedes ver las dos lunas de Klam.
+pln - Buenas noches, mi querido Jimmy. - De entre las sombras de un oscuro rincón aparece Agnes sonriente acariciándose el vientre. - Estuviste fantástico esta tarde.
+pln Comprendes a qué se refiere cuando compruebas que el mástil, y no el de la bandera que ondea en el porche precisamente, está en todo lo alto.
+pln - Es imposible. Estaba inconsciente… - titubeas.
+pln - Para algo están las drogas - replica al tiempo que te muestra un tarro medio vacío de Viagbra-32.
+pln - ¡¡¡Noooooooooooooooo!!!
+pln Te despiertas en el asiento del conductor del coche de Agnes. En el asiento de al lado está ella con el blaster en sus rodillas y el cuello chamuscado. Se ve que eras el primero al que intentaba ultrajar y se le disparó el arma por accidente al golpearte. Te quedas el rifle y tiras el cuerpo sin vida de la anciana al polvoriento suelo. Si tenías alguna oportunidad de ir al cielo, con ese acto la has desaprovechado.
+pln Te acomodas en el asiento y agarras fuerte el volante, pero te surge una duda: ¿dónde ir ahora?
+btn 49, Si continuas en la dirección que llevaba "Pelo verde" antes de perderlo de vista, corre hacia el desvío 49.
+btn 50, Si te das la vuelta camino de la ciudad, te queda un paseo hasta el 50.
+proc intermediate_loc
+end
+
+:31
+proc page_number
+pln Vuelves a la comisaría con la sensación de que se te ha olvidado algo importante. Al verte de vuelta tan pronto y sin haber siquiera comenzado a investigar el caso, te rebajan a agente raso. A partir de ahora, patrullarás las calles como si fueras un novato más.
+pln Cuando apareces por la sala de briefing, el sargento Luguer ya casi ha terminado de asignar los destinos. Por fortuna a ti te deja para el final.
+pln - Y como regalo de bienvenida para Jim -, el sargento hace todo lo posible para no parecer sarcástico, pero no lo consigue - patrullará la zona del puerto, que como todos sabemos es la más tranquila de la ciudad.
+pln Las carcajadas que estallan a continuación no hacen más que refrendar la ironía del sargento. El puerto es lugar de encuentro de toda la escoria galáctica, nada que no encuentres en cualquier otro puerto del universo.
+pln Cuando el viento fresco de la calle golpea tu cara, te sientes libre. Después de todo no te ha venido tan mal que te degradaran, empezabas a echar de menos el contacto con la gente de a pie que aún respira.
+pln Como agente novato ni siquiera tienes derecho a un patinete, así que te diriges a tu destino dando un agradable paseo mientras contemplas escenas de la vida cotidiana, eso tan desconocido para ti.
+pln Un niño paseando a un perro, una mujer paseando a un perro, un hombre paseando a un perro, un perro paseando a otro perro... Lo piensas mejor, la vida cotidiana es demasiado aburrida para un hombre de acción como tú.
+pln Nada como un chute de adrenalina durante un tiroteo para sentirse vivo, como en aquella reunión del cuerpo en la que os peleasteis por un dónut.
+pln Como muestra de la perfidia y la bajeza moral del lugar, nada más poner el pie en el Muelle Uno se te acerca una meretriz dispuesta a ofrecerte sus servicios gratuitamente, ventajas de llevar el uniforme.
+pln Nunca has rechazado un polvo gratis, así que te dispones a aliviar tensiones. Ya en su piso, os preparáis para el tema, pero antes de que puedas realizar tu famoso salto de la acémila, a la chica le surge una duda.
+pln - ¿Llevas protección?
+pln - Sí, aquí llevo la pistola - respondes distraídamente.
+pln - No, me refiero al tipo de protección que evitará que dentro de 9 meses te enroles en la legión extranjera.
+pln - ¿Cómo?
+pln No tienes ni idea de qué te está hablando. Lógico, puesto que la sangre hace varios minutos que abandonó tu cerebro.
+pln - Bah, déjalo, no me importa que no uses preservativo.
+pln Así que se refería a eso...
+image img/4.jpg|Paisaje portuario
+btn 86, Si rebuscas en tu cartera en busca de uno, rápido porque en media hora sí que empezara a cobrarte, en el 86.
+btn 88, Si pasas del tema porque el látex constriñe tu virilidad, se siente menos o simplemente en la farmacia nunca han tenido unos de tu talla, fantasma, pon el arma a punto en el 88.
+proc intermediate_loc
+end
+
+:33
+proc page_number
+pln En lugar de cumplir con tu deber, te vas al loft de Susie. Pasáis semanas encerrados en su dormitorio hablando de lo divino y de lo humano, y haciendo el amor en su mayor parte, hasta que os dais cuenta de que no os queda nada para comer.
+pln Expulsado de la policía por incomparecencia y despedida Susie del restaurante por envenenar a siete clientes con amoniaco, os ponéis a buscar trabajo, pero mientras estabais copulando como animales salvajes concentrados únicamente en explotar de placer, Natomi Corporations sacó al mercado un robot que hace todo tipo de tareas sin cobrar y sin cansarse.
+pln No tenéis más remedio que enrolaros en un circo, donde las habilidades de Susie con la lengua son bien recibidas. Tu único talento especial solo puedes mostrarlo en una cama, así que te hacen acomodador. Al menos la propina es buena.
+proc final_loc
+end
+
+:34
+proc page_number
+pln El dependiente se está riendo. Amablemente le has pedido si podías probarla y se está descojonando. Te retiras ofendido, cuando una trampilla se abre bajo tus pies. Caes a una oscura habitación sin salida aparente.
+pln El tiempo pasa, puede que horas, días, tal vez meses. Cuando al fin se abre una puerta, intentas adaptarte a la luz.
+pln - ¿Cuánto tiempo llevo aquí encerrado? - preguntas mientras te tapas los ojos con la mano protegiéndote de la luz.
+pln - 10 minutos, anda levántate que nos vamos.
+pln El dependiente te apunta con un phaser, como para negarse… Te mete en un furgón en el que os dirigís hacia un lugar desconocido al que llegáis tras 20 minutos de viaje. En la parte trasera del furgón había un reloj.
+pln El dependiente, que se llama Ali a juzgar por la licencia de aerotaxi que había en el vehículo, se detiene y te saca fuera.
+pln - Oye, tienes que limpiar esto. Está lleno de cacharros inútiles.
+pln Seguidamente echas un vistazo alrededor, parece ser el interior de un edificio antiguo a juzgar por los ordenadores Spectrum que decoran una de las paredes. Con el phaser de Ali clavado en los riñones, avanzas por interminables pasillos repletos de jeroglíficos dejados por una civilización ya extinguida. Te fijas en uno de ellos: una circunferencia amarilla con gafas de sol bajo la cual se puede leer: TOI DESLUMBRAO.
+pln Finalmente llegáis a una amplia sala, en el centro de la cual, sobre una tarima reposa una enorme caja. De una de las innumerables columnas de estilo corintio que se reparten por la habitación surge una figura: es el tipo del pelo verde con el que chocaste en el puerto espacial.
+pln - Volvemos a encontrarnos, señor... Por cierto, ¿cómo se llama?
+pln - Me llamo Jim Jason Jacobo Jerónimo Jameson Junior III, pero tú puedes llamarme señor a secas. - Que chulería la tuya. - Tenéis que saber que os habéis metido en un buen lío, soy policía estelar y en este momento hasta los agentes de tráfico vienen hacia aquí para ayudarme. Este rastreador les ha dado mi posición.
+pln Rezas para que no se den cuenta de que lo que sostienes con la mano es la chapa de socio de "El conejito veloz".
+pln - No se preocupe Sr. Jason, acabaremos pronto. Mi amigo Ali y yo queremos que abra esa caja que ve ahí.
+pln - ¿Por qué no lo hacen ustedes?
+pln - No sé si se habrá dado cuenta pero estamos en un templo toita de una antigüedad incalculable. Hasta hace poco la existencia de los toitas formaba parte de la leyenda. No sabemos qué hay ahí dentro - dice señalando la caja - pero seguro que es muy valioso y es probable que esté protegido por algún sistema de defensa o alguna maldición. Usted será nuestro conejillo de indias. No perdamos más tiempo. Venga, ábrala.
+pln Piensas en escapar, pero el loco del pelo verde tiene otro phaser y la única arma de gran calibre que tienes tú, está entre tus piernas.
+btn 37, Si aún eres lo suficientemente inconsciente como para huir, corre rápido al 37.
+btn 38, Si afrontas tu destino, como el cura calvo de "La aventura del Poseidón", y abres la caja, ve al 38.
+proc intermediate_loc
+end
+
+:36
+proc page_number
+pln Corres sin mirar atrás hasta que abandonas la ciudad. La noche te alcanza descansando bajo un árbol. No notas un descenso apreciable de la temperatura ambiente, pero no importa.
+pln Enciendes a la androide y te preparas para gozar. Lo que no esperabas es que un espeso manto de nubes te recubriera y te teletransportara a una dimensión solitaria donde no existe nada, ni siquiera la nada.
+pln De pronto escuchas una voz.
+pln - Tranquilízate Jim, ha sido el ojo de Agamotto (TM) el que te ha traído hasta aquí. Tu inaudito apetito sexual no tiene igual en todo el universo conocido, ni siquiera en el planeta Hustler. Eres un peligro para el universo. Si te dejáramos libre... Mejor no te digo lo que podría ocurrir. Para evitar la catástrofe permanecerás en esta dimensión baldía hasta que logres controlar tu libido.
+pln La misteriosa voz desaparece.
+pln No vuelves a escuchar a nadie en los 45.000 años que permaneces en ese limbo. El ojo de Agamotto, cansado de que le gorronees las cervezas, te deja libre.
+pln Sin las ataduras místicas de la dimensión baldía, la libido acumulada durante milenios se desata de golpe, explotando tu cuerpo en una lluvia de feromonas que se esparce por las galaxias, llevando el amor y la concordia a todos los pueblos.
+proc final_loc
+end
+
+:37
+proc page_number
+pln - ¡¡¡Detrás de ti, un mono con tres cabezas!!!
+pln Tu treta surge efecto, al unísono los dos criminales fijan su vista en un oscuro punto de la estancia. Aprovechas el despiste para salir huyendo. No tardas mucho en escuchar el sonido de los phasers, algo así como fium-klaw, pasando sobre tu cabeza.
+pln Suerte que eres rápido, pronto consigues despistar a los matones. Atraviesas una habitación tras otra hasta que por fin ves la luz del sol en el fondo de un largo pasillo. En ese instante un rayo pasa rozándote la oreja. "Pelo verde" te ha encontrado.
+pln Corres como si te estuviera persiguiendo el modisto de <span lang="en">MC Hammer</span> y sales de la montaña para comprobar que estás en mitad de un desierto en el que no encuentras ni un mísero cactus tras el que protegerte.
+pln "Pelo verde" sale tranquilamente de la cueva con su arma apuntándote amenazadoramente.
+pln - Debí haberte matado cuando estuviste a punto de destruir la llave de Rasxen. Despídete de este mundo, Jim. - Te grita en una demostración más de lo tópico que es el personaje. Al menos, por muy asesino que sea, conserva su educación.
+pln Toda tu vida pasa ante tus ojos: la fiesta de tu 15º cumpleaños en la que le metiste mano a tu prima, el campamento de verano Topanga en el que perdiste la virginidad con las cuatro monitoras de aeróbic, tus éxitos como cantante de rock, aquella vez que escalaste el monte Vidal con los ojos vendados...
+pln De pronto echas de menos tus recuerdos reales y no esos que te implantaste hace un par de años.
+pln El sonido de miles de sirenas ululando rompe el silencio en el que os encontrabais, retumbando contra la montaña. De algún modo, la policía os ha encontrado.
+pln "Pelo verde" tira su phaser y te escupe a la cara, pero está muy lejos y su malvada saliva se evapora en el aire a medio camino. La alegría por haberte librado de la muerte se tronca en desconcierto cuando te esposan a ti también. Ya habías olvidado el asuntillo del homicidio en primer grado, ¿verdad?
+pln La nave policial que os transporta a "Interdi 2", una prisión estelar de mediana seguridad, sufre un accidente. Os veis obligados a aterrizar en un planeta desconocido en el que nunca se pone el sol... ¿Nunca?
+proc final_loc
+end
+
+:38
+proc page_number
+pln Aprecias demasiado tu pellejo como para seguir huyendo. Además, a saber cuánto tiempo llevará la caja allí, seguro que las hipotéticas trampas que pudiera contener han caducado.
+pln No quieres ni pensarlo así que abres la tapa de golpe. No pierdes ningún miembro, ni se te cae el pelo; no había ninguna maldición después de todo. En el fondo de la caja se distingue un guante blanco con diamantes engarzados. No hay nada más.
+pln - Gracias, señor Jim. Ya no le necesitaremos - Ali va a matarte sin dudarlo un segundo.
+pln Tienes que pensar algo rápido o no sabrás cómo termina "Perdidos", y te mueres de intriga, sobre todo después de ver en el último capítulo cómo al bisnieto de Locke le crecía una calva en el cogote.
+pln Aún estás pensando, cuando de una abertura en el lateral izquierdo de la sala, sale un chillido agudo que aturde a tus captores.
+pln Te pones el misterioso guante, si has de morir que sea llevando un lujoso accesorio. Una vez bien ajustado, las joyas empiezan a girar vertiginosamente, hasta que en un momento dado se detienen bruscamente y frente a ti se materializa un genio, lo reconoces por el turbante, que te concede tres deseos.
+pln No necesitas reflexionar ni un segundo.
+pln Terminas tus días como presidente vitalicio de tu propio planeta, en el cual solo viven mujeres con grandes pechos.
+proc final_loc
+end
+
+:39
+proc page_number
+pln Ya has abusado suficiente de Agnes, en el buen sentido. Habéis congeniado durante la persecución y no quieres exponerla a ningún peligro. Le das las gracias y le dices que se vaya al bingo o a acariciar gatos, tareas típicas de las ancianas.
+pln Es hora de entrar en el sex-shop. Desde fuera parece cerrado, la única opción que tienes es colarte por una ventana trasera que, por fortuna, se han dejado abierta. Caes en una especie de almacén, está demasiado oscuro para asegurarlo.
+pln Tanteando la pared en busca del interruptor de la luz empujas un consolador doble gigante de tres metros de altura usado en alguna promoción, por mucho que quieras pensar lo contrario, que cae a gran velocidad sobre ti.
+pln Por suerte, la función vibrador no estaba activada y te golpea la parte dedicada al "agujero negro", cuyo volumen es inferior al tronco principal. Caes sin conocimiento al suelo.
+pln El dependiente te encuentra al día siguiente y te esclaviza aprovechando los artículos sado que vende en su tienda. Sin documentación, habiendo cometido un delito, siendo WASP, no puedes acudir a ninguna asociación que defienda tus derechos, estás en sus manos. Durante los próximos 10 años trabajarás como actor porno amateur en producciones ilegales con un sueldo de risa, hasta que un fan encuentre el zulo donde te retienen y te libere del cautiverio.
+proc final_loc
+end
+
+:40
+proc page_number
+pln Algo te dice que solo han parado un momento. Tras unos tensos minutos en los que Agnes intenta meterte mano, ves salir de la tienda a "Pelo verde" y otro tipo, que se montan en un todoterreno que se dirige a toda velocidad a las afueras de la ciudad.
+pln Agnes parece estar más interesada en bajarte la cremallera que en perseguir al coche, así que te pones al volante tras un acrobático intercambio de asientos que ella aprovecha para coger la "palanca de cambios".
+pln No importa que vayáis a 345 Km/h, Agnes no deja de acosarte.
+pln - Pero bueno señora, estese quieta, que podría ser su hijo.
+pln - ¿Mi hijo? Ese sarasa no complacería a una mujer ni aunque fuera dueño de una tienda de zapatos, en cambio tú, qué músculos, qué pelo, qué sonrisa. ¿Sabes que las mujeres de aquí practicamos yoga desde los 15 años? Yo tengo 60, imagínate lo que puedo hacer.
+pln Cuando te guiña el ojo es demasiado.
+btn 48, Saltas del coche en marcha. Más vale que te fijaras bien en los especialistas de El equipo A para no matarte en la curva 48
+btn 30, Le confiesas a Agnes tu gusto por las mujeres jóvenes, ¿se lo tomará bien en el 30?
+proc intermediate_loc
+end
+
+:41
+proc page_number
+pln - Soy la representante de Avon en esta demarcación, vengo a ofrecerle una muestra de nuestros productos cosméticos y armamentísticos de última generación.
+pln Pese a que la borrachera hace que arrastres las "r", suenas muy convincente; tanto, que cuando el osboriano te dice que pases no sabes cómo reaccionar. Pero ya lo hace él por ti arrastrándote hacia una pequeña nave.
+pln De todos los almacenes de todos los complejos industriales de todos los planetas de la galaxia, has tenido que dar con uno de los tres osborianos hembras que quedan y además con la única lesbiana.
+pln Se encapricha de ti quizá por el aroma que desprendes a licor de coco, afrodisíaco para los osborianos y huis al borde del universo conocido donde dais rienda suelta a vuestro amor en los momentos en que ella te permite salir de la jaula.
+proc final_loc
+end
+
+:42
+proc page_number
+pln - Bien, ya me dijo el capitán que esperábamos un gilipollas. Anda, tira.
+pln El klatch te lleva a una oficina donde pasas tres horas enzarzado en diversos trámites administrativos. Finalmente, tras hacerte la tradicional foto con un parche y un loro de plástico en el hombro izquierdo, te dan tu carné de pirata.
+pln - Y ahora - te dice el funcionario que ha gestionado tus papeles - preséntate ante el capitán. Está en la nave, no tiene pérdida. Sal por la puerta del fondo y la verás.
+pln En efecto, tras despedirte con un corte de mangas, el tradicional saludo pirata, sales fuera y te encuentras con una rampa de lanzamiento donde reposa la inmensa nave que será tu hogar por un tiempo indefinido.
+pln Decenas de trabajadores corretean por los alrededores, ocupados en distintas tareas. Con cuidado de no chocar con alguno, entras en la embarcación estelar.
+pln Te diriges al puesto de mando, donde te espera Pitt y varios miembros de la tripulación. El más parecido a un humano es el loro del capitán.
+pln - Ah, Jim, bienvenido - parece contento de verte - ¿Tienes ya el carné de pirata? Bien, déjame que te presente a tus nuevos compañeros.
+pln Estos se colocan en fila, preparados para pasar revista. En la cara de ninguno puedes encontrar el mínimo atisbo de amabilidad o buen rollo.
+pln - En primer lugar, Ray Lollypop, nuestro navegante. Perdió el ojo izquierdo en una pelea con mi loro. Si Ray te pide una galleta salada dásela, es un consejo. Piquito no lo hizo y mira como se ha quedado el pobre -choca sus nudillos contra el loro, te extraña el ruido metálico que produce- Está recubierto de titanio. A continuación tenemos a Tony Sugar, nuestro jefe de artilleros. No te hagas una idea equivocada porque carezca de brazos, usando los pies es el mismísimo diablo. Si necesitas un corte de pelo, es tu hombre. Y por último déjame que te presente a Jasmine Chupa-chups nuestra... enfermera. Una vez echas las presentaciones, tenemos que darte un nombre pirata, Jim a secas no tiene gancho.
+pln - ¿Qué le parece Jimmy Peta zetas?
+pln - Mmm, ¿Peta zetas?
+pln - Si, inofensivo por fuera, y un volcán dentro de tu boca.
+pln Los ojos de todos los presentes se abren como platos.
+pln - Mmm, no sé si debería colgarte por lo que has dicho. - El capitán parece turbado. - Da igual, para serte sincero no lo he entendido muy bien. Venga tenemos trabajo.
+pln La tripulación vuelve a sus puestos mientras tú acompañas a Pitt al puente.
+pln - La tradición pirata establece que el novato tiene la oportunidad de elegir su primera razzia. Aquí tienes una lista de sistemas vírgenes que aún no hemos visitado.
+pln A duras penas coges el mapa que te ha tirado.
+pln Si te preguntas por la falta de normalización en las coordenadas, debes saber que en el futuro las normas ISO no existen, fueron abolidas por Anarco II, pero esa es otra historia.
+btn 57, Si te decantas por el planeta A1H20B4, salta al hiperespacio hacia la cuadrícula 57.
+btn 55, Si tienes buenas vibraciones con las coordenadas AIAEI, sigue el vector de navegación hacia el sistema estelar 55.
+proc intermediate_loc
+end
+
+:44
+proc page_number
+pln Ya has tenido bastantes aventuras como para arriesgarte a adentrarte en el oscuro pasillo del que además se desprende un olor parecido al del melocotón, el cual aborreces.
+pln Decides darle una oportunidad a los mineros, tal vez alguno de ellos tenga un minijet con el que huir de ese extraño planeta. Caminas durante varios días por valles sembrados de edificios en ruinas que apenas sobresaldrían del suelo en su época de mayor esplendor. De vez en cuando vas encontrando restos de los antiguos habitantes del planeta: un bastón por aquí, una pipa de fumar por allá, un broche con forma de hoja...
+pln En el lecho de un riachuelo encuentras un anillo con extraños símbolos pero cuando vas a cogerlo te percatas de que continúa enhebrado en el dedo de su antiguo dueño (que por cierto no se cortaba las uñas), así que lo dejas donde está. Seguro que era una baratija.
+pln Poco después, llegas a la ladera de una montaña donde se apiñan un puñado de anticuadas casas de madera. De una de ellas sale un humanoide de no más de 1,40 metros de estatura, barba y bigote espesos, con un casco con dos cuernos y un hacha al cinto, que no duda en desenvainar nada más verte.
+pln - ¡¡Me rindo, me rindo!! - suplicas cobardemente al borde del llanto.
+pln El humanoide baja el hacha avergonzado ante tamaña muestra de pusilanimidad.
+pln - Tranquilo hombre, es que me habías sorprendido. Me acabo de despertar y te he visto ahí de pie y te he confundido con el cobrador del frac.
+pln - ¿Entonces esta es la colonia minera que estaba buscando?- preguntas mientras echas un vistazo alrededor.
+pln - Hombre, tú sabrás, aquí hay una mina y mineros, pero igual hay más por ahí, aquí somos poco curiosos. La mina ocupa todo nuestro tiempo y no solemos viajar mucho. Por cierto, perdona mi falta de modales. Me llamo Ulin.
+pln Estrechas su pequeña, pero robusta, mano. Si apretara más, podría romperte todos los huesos de la mano.
+pln - Yo soy Jim, encantado.
+pln Intentas sonreír, pero, ¿por qué hay que mostrar siempre alegría ante los demás por muy jodido que estés?, así que sigues mostrando la misma cara de amargado de siempre.
+pln - ¿Qué te trae por aquí, Jim?
+pln Con un gesto, Ulin te invita a sentarte en el suelo. No parecen muy hospitalarios los mineros. Para no ofenderle, te sientas en un trozo libre de pedruscos y le cuentas tu historia, desde el principio del libro.
+pln - Caray Jim, me hubiera valido con que me dijeras que necesitabas un minijet. No por nada, ¿eh? Es una historia interesante, pero el tiempo es oro y a lo tonto me has tenido aquí dos horas escuchándote que me descontaran de la nómina. - Pese a lo que pueda parecer, no lo dice enfadado. - En cualquier caso no tenemos un solo vehículo de transporte. Se los llevaron todos nuestras esposas cuando se divorciaron de nosotros.
+pln - ¿Entonces no queda aquí ni una sola mujer? - preguntas sorprendido y un poco decepcionado.
+pln - Por desgracia no, tal vez un psicólogo encontraría en ello la explicación de por qué tenemos la fijación de penetrar en la montaña hasta lo más profundo una y otra vez. Todas las mañanas nos levantamos con unas ganas locas de entrar en ese cálido agujero - exclama señalando un boquete en la ladera a pocos metros de donde charláis.
+pln La decepción se muestra en tu rostro. Ulin lo nota y te hace una proposición.
+btn 52, Si te quedas con Ulin y sus compañeros en espera de que algún día encuentres a una Blancanieves, colócate a presión el casco de minero en la veta 52.
+btn 51, Si te alejas de allí otra vez en busca de una salida del planeta, enfúndate bien la capa. El camino será largo en la llanura 51.
+proc intermediate_loc
+end
+
+:46
+proc page_number
+pln La curiosidad te puede, así que atraviesas el rústico corredor que desemboca en una pequeña habitación con una puerta en el fondo y una caseta de perro, de la que sale un escuálido chihuahua que empieza a ladrarte con desgana.
+pln - Balchuk, déjalo anda. Vete a descansar.
+pln Obedeciendo a la voz de su dueña, el perro entra de nuevo en la caseta.
+pln Abres la puerta y encuentras ante ti centenares de imágenes tuyas adornando una inmensa sala cuyo techo no logras vislumbrar. Miles de espejos dispuestos en forma de laberinto son el único mobiliario aparente de la estancia.
+pln La voz que escuchabas antes te va dando indicaciones de por dónde ir. Cuando tras cuatro horas de dar vueltas, te das cuenta de que la misteriosa chica se está riendo de ti, furioso, empiezas a romper los espejos. Estos de pronto se elevan varios metros, descubriendo a pocos metros de tu posición a la mujer más bella que tus ojos han visto nunca. Una larga melena rizada castaña a juego con unos ojos del mismo color.
+pln - Hola, soy Jim y tú eres preciosa.
+pln - Lo sé, ¿por qué crees que tengo tantos espejos? Jijij. Yo soy Esione, encantada.
+pln Cuando te sonríe sientes como si una descarga eléctrica recorriera tu espina dorsal y se te queda cara de bobo.
+pln - ¿Y bien, Jim, por qué te han dejado aquí esos piratas?
+pln Por el tono en que ha dicho "piratas" te da la impresión de que ya los conocía de antes. Le cuentas cómo quisiste dejar esa vida de maldad a la que te viste abocado desde pequeño, empiezas a darle lástima por la cara que pone, el primer paso hacia el amor.
+pln - Lo lamento mucho, Jim. Este planeta está casi deshabitado, ni siquiera es un planeta de verdad. Todo lo que ves es falso.
+pln - Menos tu hermosura. - Apuntas con presteza.
+pln - Gracias, Jim. Vas a hacer que me sonroje.
+pln - Así tu semblante será aún más bello.
+pln - ¡Qué tonto! Jijiji.
+pln Dos puntos, colega.
+pln Con ese último piropo consigues ganarte su confianza. No es que sea una chica fácil, es que lleva mucho tiempo sola, como descubres cuando te cuenta su historia, la cruel manera en que su padre la abandonó en ese solitario planeta y la encerró en la sala de los espejos, que no es más que una excusa para librarse de los curiosos.
+pln Como no tienes dónde ir, te quedas a vivir con ella. No tarda en prender la mecha del amor entre los dos. Con una pasión que no habías sentido antes, te entregas a Esione en cuerpo y alma durante varios meses, hasta que un día...
+pln El sonido de los motores de una astronave te despierta una mañana. Esione salta de la cama como una exhalación, te lanza tu ropa y te pide que te vayas.
+pln - Pero, ¿por qué? - preguntas extrañado.
+pln - Porque viene Vin: mi novio y como te pille nos la vamos a cargar.
+pln La confesión te ha dejado helado, jamás te habló de que tuviera pareja.
+btn 64, Si tu amor por ella es tan grande que te quedas a defender tus sentimientos, coge las pistolas y prepárate para un duelo en la plaza del pueblo 64
+btn 63, Si te vas despechado, huye con el rabo entre las piernas al 63
+proc intermediate_loc
+end
+
+:48
+proc page_number
+pln Siempre te has considerado un degenerado pero no hasta el punto de enrollarte con la abuelita Paz; una lástima no haberla conocido unas décadas atrás, pues tras sus innumerables arrugas se esconden destellos de una belleza ya añeja.
+pln Gracias a la poca gravedad y a que has caído en un campo de gomaespuma, apenas te haces un rasguño. Ves desaparecer el coche tras una colina. Sin conductor, esperas ver como explota, al igual que en las películas, pero a medida que pasan los minutos y ninguna nube con forma de hongo rompe la monotonía del cielo, vas pensando que igual la vieja se ha hecho con el control del vehículo y se dirige en tu búsqueda.
+pln Consigues llegar al pueblo al borde de la extenuación. Agotado y deshidratado, abres la puerta de la primera casa que encuentras en busca de ayuda, entras al salón y allí, vestida con un mono de cuero negro y restallando un largo látigo esta ella: Agnes.
+proc final_loc
+end
+
+:49
+proc page_number
+pln Parece mentira pero el desierto es enorme. Tras un par de horas vagando sin rumbo fijo, una tormenta de arena cae sobre ti repentinamente nublando tu vista, lo que te obliga a detenerte.
+pln Una vez que el viento se ha calmado abres los ojos y ves cómo el paisaje árido por el que te arrastrabas ha sido sustituido por un área residencial de una ciudad cualquiera de principios del siglo XXI.
+pln Estás en medio de una plaza, rodeado por pequeños edificios de no más de tres plantas. Algo en tu interior te impulsa a ir al que tienes enfrente. En la planta de abajo hay un bar al que te sientes tentado de entrar a tomarte unas cañas, pero el prohibitivo precio de estas te echa atrás, así que subes las escaleras hacia el segundo piso.
+pln Una vez ante la puerta dudas si llamar al timbre, cosa que no te hace falta hacer porque con un ligero chirrido esta se abre y aparece ante ti un joven. No sabrías decir si guapo o no. No "entiendes".
+pln - Hola Jim - te dice mientras sonríe afable. - Soy tu creador.
+pln La revelación te deja en estado de shock, pero de pronto todo empieza a encajar.
+pln - Tío, lo de la vieja fue repugnante. Estás enfermo ¿eh?
+pln Y le das una colleja bien fuerte por no haberse esforzado más.
+pln Como compensación por todo lo que te ha hecho pasar te quedas a vivir en su casa.
+image img/5.jpg|Fachada de una casa de dos pisos
+proc final_loc
+end
+
+:50
+proc page_number
+pln Tienes que dejar el coche a tres kilómetros de la ciudad porque se quedó sin aceite de girasol. Todavía recuerdas cuando el diésel se agotó y cómo los científicos holandeses consiguieron desarrollar un carburante con dicho aceite convirtiendo a Holanda en la mayor superpotencia de la Tierra.
+pln Por los últimos acontecimientos, le has cogido un asco enorme al lugar, así que coges el primer transbordador de vuelta a casa, donde no solo no te recibe la policía como esperabas, sino que te otorgan una medalla por haberte cargado al mayor narcotraficante del planeta. El comisario se sacaba un sobresueldo como sospechabas.
+pln A petición de la viuda, te otorgan el puesto del comisario, cargo que desempeñas con total falta de moral.
+proc final_loc
+end
+
+:51
+proc page_number
+pln Estás ganándote una fama de errante que para sí la quisiera Willie Fog.
+pln Te alejas de los mineros no sin antes darles las gracias a Ulin por suministrarte algunos víveres para tu largo viaje. Te ha hablado de una tribu de humanos que se asentaron a dos días de camino en dirección Este hace varios años.
+pln Hacia allí vas silbando alegremente, cuando tras una loma surge un grupo de orcos con mala leche cantando "<span lang="en">I was made for loving you</span>". Antes de que puedas echar mano de la pistola láser, una flecha atraviesa tu garganta.
+proc final_loc
+end
+
+:52
+proc page_number
+pln Cansado de tanto viaje aceptas la oferta de trabajo de Ulin. El salario es bueno, los compañeros manejables y confías en que la carencia de féminas te ayude a dominar tu furor uterino. Lo único malo es que no tienen ropa de trabajo de tu talla, así que tienes que bajar a la mina desnudo.
+pln A las dos semanas de tu llegada, cuando te has acostumbrado al roce de la piedra contra las partes más suaves de tu cuerpo, un murmullo recorre el campamento.
+pln Le preguntas a Ulin y este te comenta que el jefe Bombin ha encontrado por casualidad una inmensa gruta en el interior de la montaña. Dicen que dentro hay extraños aparatos alienígenas.
+pln Movido por la curiosidad, y porque encuentras excitante el roce contra las rocas, vas a echar un vistazo.
+pln La estancia te sobrecoge. Es inmensa. Más que una gruta es una gran sala artificial coronada en una cúpula. En cada una de las cuatro paredes se distingue un símbolo extraño: PS... el último símbolo parece ser una X. En el centro, rodeado por ansiosos mineros que saltan en un fútil intento por verla mejor, se yergue un grueso pedestal de 1,60 metros de altura aproximadamente, coronado por un hueco con la forma de una mano de cuatro dedos.
+pln Cuando se lo comentas a los enanos, estos se quedan con la boca abierta hasta que Sinfild empieza a contar chistes sobre onanismo.
+btn 53, Si pones la mano en el hueco a ver si con suerte activas una bomba y así no tienes que soportar más los obscenos chistes de Sinfild, límpiatela antes de pasar al 53
+btn 54, Si le dices al jefe que sería mejor dejarlo como esta vaya a ser que pase algo malo, que nadie toque nada en el 54.
+proc intermediate_loc
+end
+
+:53
+proc page_number
+pln Entre tus virtudes nunca estuvo la prudencia, así que ni corto ni perezoso unes el meñique y el anular de tu mano izquierda, no quieres arriesgar la derecha, y la colocas en el extremo del pedestal.
+pln Una luz cegadora proveniente del mismo inunda la cavidad. La montaña entera comienza a temblar y los enanos corren hacia el exterior acordándose de toda tu familia en no muy buenos términos.
+pln Cuando el suelo empieza a resquebrajarse decides seguirlos. Corres sin parar hasta que te alejas de la mina un par de kilómetros, momento en el cual, sientes en tu espalda la onda de choque de una gran explosión. Te das la vuelta en el momento preciso en que una inmensa columna de humo comienza a brotar de la cima de la montaña.
+pln Pronto, el viento te trae un olor como de césped recién cortado ardiendo. El caso es que te resulta familiar... El humo se extiende por el planeta a medida que aumenta la felicidad de sus visitantes. El buen rollo y las risas se apoderan de todo. Nunca más iréis a la mina con el ánimo decaído, aunque más de una vez confundes la pala con…
+proc final_loc
+end
+
+:54
+proc page_number
+pln Haces llamar a Bombin y le informas de la extraña marca sobre el pedestal. Podrías poner la mano encima pero sabe dios lo que activarías. La última vez que se hizo algo parecido, Marte perdió su bonito color rojizo.
+pln Asustado por la posibilidad de que pueda sobrevenir una catástrofe, Bombin decide dar parte a los rangers espaciales con una radio cuya existencia te habían ocultado. Te agarras tal cabreo que cuando los rangers van a investigar el artefacto extraño, te vas con ellos, no sin antes obsequiar a los perplejos mineros con un sonoro corte de mangas.
+pln - Tiene usted mucha suerte. Hace años que no pasamos por este planeta. Se utilizó para rodar una película y apenas quedan un puñado de extras a los que desahuciaron de sus antiguos hogares. Podría haberse quedado allí toda la vida de no ser por el aparato alienígena.
+pln - Por cierto, ¿qué es? - preguntas por decir algo, porque la verdad es que no te interesa lo más mínimo, pero el viaje es largo y no quieres que piensen que eres un triste.
+pln - Un wáter portátil.
+pln El ranger sonríe para sí al recordar el regalo que le ha dejado a los mineros.
+proc final_loc
+end
+
+:55
+proc page_number
+pln - Buena elección, Jim. Abrochaos los cinturones, nos largamos.
+pln Al instante la sala de mando se convierte en una jaula de locos con gente yendo de un lado para otro. En cuanto echas el ojo a un asiento libre, te abrochas el cinturón expectante por las aventuras que te esperan.
+pln Gracias a la velocidad estúpida llegáis en unos minutos a vuestro destino. Con gran pericia, Tony hace descender la nave en el centro de la plaza de una céntrica ciudad. Cuando salís al exterior, comprobáis cómo los habitantes no se han sobresaltado lo más mínimo por vuestra llegada. Van andando de aquí para allá inmersos en sus quehaceres, todos vestidos por un mismo patrón: boina negra ladeada, camiseta de rayas blancas y azules horizontales, pantalones de pitillo, cigarrillo en boca y todos y cada uno de ellos, mujeres incluidas, lucen un fino bigote con las puntas hacia arriba.
+pln Aprovecháis que uno de esos seres pasa lo suficientemente cerca de vosotros para capturarlo e interrogarlo. Es entonces cuando el extraño viandante se digna a prestaros su atención.
+pln - Ah, hola. ¿Cómo está usted? Oh, que kitchs -, comenta refiriéndose a la nave. - Un vehicúlo voladog. Hace siglos que nos deshicimos de las nuestgas.
+pln - ¿Dónde estamos y qué hay de valor por aquí?- pregunta Pitt con malas pulgas.
+pln - Este es nuestgo planeta "<span lang="fr">Vive la France</span>". Yo soy Pierre y vosotgos unos maleducadós.
+pln No bien termina de hablar, lanza un escupitajo al capitán, que de la rabia tira al "vivelafrancés" a una fuente de la que mana un extrañamente familiar líquido verde.
+pln Cuando Pitt considera que se ha refrescado bastante, lo saca y le vuelve a preguntar.
+pln Quién sabe si por miedo o porque está como una cuba, bebes un sorbo de la fuente y compruebas que es absenta, os habla de una fortuna incalculable que se esconde en una fortaleza en el polo norte del planeta.
+pln Los piratas parten hacia allá sin ti. El capitán te ha dejado al cuidado de Pierre y de la máquina embotelladora de absenta. Como no hay mucho que hacer, le pides al rehén que te hable de "<span lang="fr">Vive la France</span>".
+pln - ¿Comó? ¿Entonces lo de antes no ega una brgoma? - Está escandalizado. - Es un milaggo que estéis vivós aún. Nuestgos filosofós tienen la teoguía de que quien no conoce "<span lang="fr">Vive la France</span>" no existe. Tendrgé que dag pagte a la academia de ciencias.
+pln Antes de que puedas reaccionar, Pierre se pierde entre la maraña de callejuelas que rodean la plaza.
+pln Al atardecer, vuelven los piratas con cara de pocos amigos. De gran tesoro nada, únicamente una biografía comparada de De Gaulle y Napoleón, esa era toda la fortuna que había allí.
+pln El robot de carga empieza a introducir las botellas de absenta en la nave. Ya te dispones a echarle el último vistazo a la plaza cuando os veis rodeados de policías.
+pln - Altó, no pueden magchagse - grita por el megáfono lo que parece, es un oficial. - Según la ley 214-b todos los que nos visitan deben pasag un examen de francés. Si intentan igse no nos quedaga más gemedio que atacag.
+btn 84, Si pasáis de todo y os largáis, Los Doors estarían orgullosos de ti, salid de allí en el 84.
+btn 85, Si haces caso a la ley, pasa por el aro y ríndete en el 85.
+proc intermediate_loc
+end
+
+:57
+proc page_number
+pln - Señor Piruleta, ponga rumbo a estas coordenadas.
+pln La súbita aceleración de la nave te pilla de improviso. Sales despedido hacia la silla del capitán y uno de los brazos se te clava en... Dejémoslo en que ves las estrellas sin mirar por la escotilla.
+pln Para cuando te recuperas ya habéis llegado al planeta. La nave ha aterrizado en lo que parece ser un jardín. Como novato, se te concede el privilegio de pisar el primero el nuevo planeta.
+pln Cuando se abre la escotilla, ves corriendo hacia ti a un humano con una cabeza enorme con poco pelo. Cuando está a pocos metros de ti lo reconoces...
+pln - No puede ser - te dices una y otra vez. - Iker, macho, ¿qué haces tú aquí?
+pln - ¡Al fin un humano! No te lo vas a creer, pero ¡los extraterrestres existen, tío! ¡¡Existen!! Qué ganas tenia de contárselo a alguien. Por cierto, ¿tú quién eres?
+pln Le cuentas a Iker tus peripecias y los acontecimientos más destacados desde que él fuera abducido cuando iba de camino a casa.
+pln - Yo al principio pensaba que eran los barrenderos, que siempre me estaban gastando bromas, pero cuando empezaron con las sondas anales... Solo un alienígena podría tener un dedo tan largo. - parece turbado al recordar los acontecimientos, es mejor cambiar de tema.
+pln - ¿Qué planeta es este?
+pln - Su nombre es Atlantis, como el del mítico continente del que tantas veces hablé en mi nave del misterio. Me pregunto si Carmen seguirá estando tan buena...
+pln - Dejaos de cháchara.
+pln Pitt se os acaba de unir y parece impaciente.
+pln - ¿Qué hay de valor por aquí?
+pln - Hombre, tenemos mucha agua. Si buscas bien encontrarás agua y… en general lo que mayormente hay es agua. Ah, se me olvidaba, ahí abajo -, Iker señala al mar -, tenemos el mayor tesoro del universo: la perla de Rab’a.
+pln Los ojos de Pitt se iluminan como los focos tras la huida de un presidiario. Manda buscar a la nave los trajes de buzo.
+pln Tras daros las indicaciones oportunas, Iker se despide de vosotros, tiene que ir a trabajar.
+pln El ajustado mono de neopreno te queda como un guante y te hace más delgado además. Lo que ya no te gusta tanto es la pecera que tienes que ponerte en la cabeza y a través de la cual ves todo algo borroso.
+pln Pitt, Ray, Tony, un par de secuaces que no merece que los nombres y tú, os sumergís en las oscuras aguas. Camináis durante un rato entre la atípica flora marina, extrañados por la ausencia de vida animal. No tardáis mucho en llegar al pie de un muro de roca que se eleva bajo el agua más de 200 metros.
+pln Cuando retiras algo parecido a un alga de tu visera, ves una pequeña entrada en la piedra. No es una abertura natural, los bordes están demasiado lisos y los ángulos son demasiado perfectos.
+pln Como recién llegado, te toca ir en primera línea. Te preguntas si todo el rollo de los derechos de los novatos no es más que el equivalente pirata de un contrato temporal.
+pln Con la determinación de hablar seriamente con Pitt una vez estéis de vuelta, te adentras en la negrura. No se ve un palmo. No te queda más remedio que ir palpando las paredes.
+pln Tanteas con cuidado el terreno varios minutos. El túnel parece ensancharse a medida que os vais adentrando en él. De pronto, tu mano se posa sobre una especie de esfera blanda y gelatinosa que se va endureciendo conforme la vas tocando más y más.
+pln Cuando notas una especie de botón contra la palma de tu mano, una voz femenina te interrumpe.
+pln - Tú sí que sabes tratar a una chica, ¿eh?
+pln Una explosión de luz os ciega al instante. Pasados unos segundos abrís los ojos solo para ver que os encontráis en una inmensa cúpula de mármol, en cuyo centro, levitando, yace la mayor perla que jamás hayas visto, pero con todo, lo más sorprendente es la sirena a la que estabas masajeando un pecho, que te mira sorprendida.
+pln A una señal de Pitt, uno de los lacayos se lanza hacia la perla, pero antes de llegar a tocarla, la sirena con rápidos reflejos se abalanza sobre él y le arranca los brazos de cuajo.
+pln Huis despavoridos fuera de la estancia. Pitt ordena una reunión urgente junto a un cactus oceánico.
+pln - Tenemos que conseguir esa perla como sea, ¿alguna idea?
+pln - Que alguien se la ligue y mientras el resto robamos la joya - sugiere Ray.
+pln - Me parece bien, ¿algún voluntario?
+pln - ¿Por qué no Jim? Le ha metido mano a la "chica" y no se la ha cortado.
+pln - ¿Pero por qué yo? ¿Por qué no Tony? - replicas enfadado.
+pln - Entiéndelo Jim, a ti el traje te marca más paquete.
+pln Ese comentario del lacayo superviviente no te ha gustado nada. Nota mental: no agacharse ante él.
+pln - La ley del mar exige que se resuelva la disputa tirando una moneda al aire. ¿Qué eliges Jim?
+pln No te ha gustado la sonrisa de Pitt ni el guiño que le ha lanzado a Tony, pero no te queda más remedio que escoger.
+btn 60, Si eliges cara, ve al 60.
+btn 62, Si eliges cruz, ve al 62.
+proc intermediate_loc
+end
+
+:60
+proc page_number
+pln Sale cara. Pitt tendría que haberte dicho que el que ganaba entraría, así el chasco no hubiera sido tan grande.
+pln Con el valor que solo puede infundir el sentir en la espalda las miras telescópicas de varios rifles de plasma, te adentras en la roca.
+pln En la sala de mármol te espera la sirena. Antes con las prisas no te habías fijado en lo bella que es, tiene una bonita cola de escamas verdes, una tupida cabellera roja como el fuego y unos ojos que parecen esculpidos en jade.
+pln Sonríe cuando se percata de tu presencia.
+pln - Eres tú otra vez, el pulpo jijiji.
+pln Su armoniosa voz te hipnotiza.
+pln - Hola, pechos de azúcar.
+pln Algo ha salido mal, porque en un segundo ha pasado de ser una bella pescadilla a un sanguinario tiburón blanco. Te miras el paquete, está igual que siempre así que eso no ha podido ser, quizá tienes mal aliento...
+pln No ves venir el coletazo que golpea tu entrepierna y hace que te dobles como un soldado de plomo en un horno. No es más que el inicio de la dolorosa paliza que te va a propinar.
+pln - No te habrá molestado que te llame pechos de azúcar, ¿verdad?
+pln Uno de sus innumerables puñetazos te ha hecho ver la luz.
+pln - ¿A quién se le ocurre decirle eso a una chica?
+pln Desde luego sabe hablar y pegar a la vez.
+pln - Verás, es que en mi planeta es costumbre saludar así a nuestras hembras. Sus aureolas están edulcoradas y tras el saludo procedemos a lamerlas.
+pln - ¿Ah sí?
+pln Cesa de golpearte y te mira con cara de desconcierto.
+pln - ¿Y cómo lo hacéis exactamente? -pregunta interesada.
+pln - ¿Puedo?- preguntas tímidamente al tiempo que señalas su pecho.
+pln Ella asiente y con extremo cuidado aprisionas sus pechos con tus manos y los juntas para tenerlos bien cerca uno de otro. Sin la escafandra morirás en segundos pero te da igual.
+pln Empiezas a lamer suavemente sus aureolas, intercambiando pequeños mordiscos y lametones a sus pezones. Parece que le gusta pues cierra los ojos y baja la guardia.
+pln Tú no los ves, pero el grupo de piratas aprovecha la situación para robar la perla y huir. Durante varios minutos continúas saboreando los abundantes senos de la sirena, hasta que ella te pregunta si has hecho alguna vez el amor con una sirena.
+pln La pregunta te deja desconcertado, pensando en los problemas técnicos de acoplamiento, pero no hace falta que respondas pues mientras, ella se ha percatado de que la perla ha desaparecido y lanza un grito de rabia que hace temblar las paredes.
+pln Asustado, huyes por el túnel. Al salir no hay ni rastro de los piratas y una vez en la superficie compruebas que la nave no está.
+pln Estás tan ocupado insultando a los piratas que no te has percatado de la llegada de Iker.
+pln - Tienes que olvidarlos hermano, se han ido. Te han abandonado aquí pero no sufras, puedes quedarte conmigo. ¿Sabías que tengo un programa de radio? Necesito un nuevo guionista, ¿te interesa?
+proc final_loc
+end
+
+:62
+proc page_number
+pln Sale cruz, así que te libras de tan arriesgada misión. Tony se introduce en solitario en el túnel. Cuando, pasado un tiempo prudencial os habéis asegurado de que no se ha escuchado ningún grito, entráis con extremo sigilo, casi de puntillas. Al llegar a la habitación de mármol, observáis cómo en un rincón se lleva a cabo el primer apareamiento humano-pez del que se tiene constancia.
+pln - ¿Ves? le dices al capitán - ya te dije que Tony es un playboy.
+pln El lacayo superviviente se adelanta a recoger la perla. Una vez en su poder, salís a toda pastilla. En algún momento de la carrera alguien llega a preguntar por Tony.
+pln - Bah, dejadlo, él ha follado. Ya tiene su parte. - es lo único que dice el capitán.
+pln Ya veis el final del túnel cuando de pronto este se oscurece como si alguien lo hubiese tapiado. Intentáis frenar antes de chocar contra lo que sea que obstruya la entrada, pero con la inercia os es imposible.
+pln El capitán, que encabezaba el grupo, es atravesado por el tridente de un sireno de pelo y barba blancos tocado con una corona de oro.
+pln - Oh no, el capitán ha muerto. - grita inconsciente de que va a salvar su vida, puesto que todo el mundo sabe que si en una historia un personaje principal muere, el resto se salva, lacayos y personajes secundarios graciosos incluidos.
+pln Mientras el sireno juguetea con el cuerpo sin vida de Pitt, conseguís salir a la superficie y alcanzar la nave. Ni siquiera escuchas los gritos desesperados de Iker, que pide que le llevéis con vosotros.
+pln Una vez en órbita, el resto de piratas te nombran su capitán, después de ganarte el puesto de una forma que no puede ser contada en una historia para todos los públicos como esta. Te replanteas entonces cambiar de nombre por alguno más acorde con tu rango. Todo el mundo temerá a partir de ahora al capitán Jim "soy la polla" Johnson.
+proc final_loc
+end
+
+:63
+proc page_number
+pln - Mujeres como tú son las que hacen que considere la homosexualidad como una opción a tomar en cuenta. - Le gritas con la esperanza de que te oiga, puesto que ya va de camino a la puerta a recibir a su "amado".
+pln Una vez te has vestido, registras su dormitorio. Le robas las joyas y el poco dinero en metálico que guarda. Sales por la ventana y esperas agazapado entre un montón de huesos a que la feliz pareja entre en el dormitorio, momento que aprovechas para sustraer la astronave al cornudo feliz y dejar atrás ese horrible planeta.
+pln - Me pregunto si los huesos que había en el planeta pertenecieron a otros tipos que Esione se cepilló y no pudieron escapar…
+pln Las luces de neón de una estación espacial de carretera te sacan de tus cavilaciones. Aparcas la nave y dispuesto a olvidar el disgusto, te gastas hasta el último céntimo con Rocy, una sueca de manos ligeras y suaves que te hace olvidar a cualquier otra mujer.
+proc final_loc
+end
+
+:64
+proc page_number
+pln No has visto "El diario de Bridget Jones" 8315 veces para dejar ahora que otra persona se quede con tu chica. Lucharás por ella aunque tengas que ponerte un ajustado mono azul de licra y tengas que darle de hostias al novio con un palo de gomaespuma.
+pln Con porte digno, te diriges hacia la ventana en espera de que vuelva Esione. Fuera hace un día espléndido, incluso las calaveras parecen felices. La puerta se abre con un ligero chirrido pero no te mueves un centímetro.
+pln - Esione, ¿quién es este tipo?
+pln Vaya, tiene voz de pito, no puede ser muy peligroso. Una vez más te equivocas en tus percepciones, la gigantesca visión de una mole de dos metros más desarrollado que el miembro sexual de un bantú, te deja perplejo.
+pln - Soy Jim, encantado.
+pln Le tiendes la mano pero él la ignora. No serás tú el que le obligue a dártela.
+pln - No es lo que parece, querido -, interviene Esione con la calma de un político en el pleno del lunes por la tarde. - Este hombre pasaba por aquí y vino a pedirme un vaso de agua.
+pln Te parece la excusa más estúpida que has escuchado nunca, ni siquiera tu ex-mujer se la creyó cuando os pilló a tu compañera y a ti haciendo "prácticas de cacheo". Luego está el hecho de que después de todo lo que le has dado, te haya despreciado de la peor manera.
+pln Cabizbajo abandonas el edificio sin que el novio te haga nada, bastante ocupado está en hacerle cosas a Esione.
+pln Vagas por el planeta hasta que un día llegas a la orilla de un lago, te sientas en una roca que parece cómoda y a partir de entonces dedicas tu vida a meditar sobre las mujeres.
+proc final_loc
+end
+
+:65
+proc page_number
+pln Corres tras Zipple pensando que eres más veloz que él y no te costará atraparlo, pero al traspasar el umbral de la puerta te quedas anonadado. A lo largo de un interminable pasillo se distribuyen centenares de puertas numeradas, Zipple ha podido escapar por cualquier de ellas.
+pln Empiezas a abrir una tras otra. Muchas dan a habitaciones vacías, pero para lo que te deparan algunas, no estás preparado. En la primera, te encuentras con la habitación de un señor calvo sentado frente a 200 televisores en cada uno de los cuales se retransmiten partidos de fútbol; en la de más allá, un trío de jovencitas disfrazadas de mariquitas te reciben al grito de: ¡Mariquita tu padre! Marcas esa puerta para volver más tarde y debatir esa cuestión y continúas abriendo puertas.
+pln Lo echas a suerte esta vez, pero tampoco aciertas. Tras la puerta elegida está la habitación de un joven con grandes patillas y una camiseta azul en la que dice... no, es demasiado ofensivo para decirlo.
+pln Asombrado por el mensaje de la camiseta, cierras la puerta rápidamente y entonces lo ves, un chino con mandil se dispone a entrar a una de las puertas.
+btn 67, Si persigues al chino en busca de alguna pista y de productos de uso diario bien baratos, recuerda que este no vende rosas en el 67.
+btn 68, Si continúas a tu rollo, diviértete en el 68.
+proc intermediate_loc
+end
+
+:66
+proc page_number
+pln Le comentas a Chuk, que al del pelo verde se le ha caído en su huida un resguardo del guardarropa en el que dice: "Vale por un artefacto alienígena ilegal". Chuk mira intensamente a todos los que intentan atacarle y acaba con ellos. La calma vuelve al local.
+pln En el guardarropa, un tentáculo rosa os canjea el resguardo. Os entrega una tablilla con las reglas de algo llamado "Cluedo", pero por la parte de atrás se encuentran unas coordenadas que decidís seguir, llevándoos hasta un enorme oasis en medio de Nideo, el principal desierto de Klam.
+pln Entre centenares de palmeras, pastores nómadas y camellos, os topáis con Zipple, cargando en su nave unos pequeños objetos circulares rodeados por una cuerda.
+pln - Quieto ahí Zipple, no me obligues a dispararte. Con la grasa que tienes en el pelo capaz de que el rayo rebote en él y maté a uno de estos pobres camellos.
+pln - Comprendo que no quieras herir a tus semejantes - responde el mafioso con sorna -, pero no eres el más indicado para criticar mi pelo. Yo al menos no necesito unas tijeras de podar para cortármelo.
+pln - Claro, porque a ti te lo corta tu madre y tiene unas manos grandes y fuertes. Si lo sabré yo que el otro día fui a verla al zoo...
+pln Te sientas a descansar bajo una palmera sorprendido por la lucha de insultos que se desarrolla ante tus ojos.
+pln Dos horas de expresiones malsonantes, de motes ofensivos, de exabruptos y menciones bochornosas a familiares y amigos después, Zipple se da por vencido y se entrega a Chuk sin oponer resistencia. Pero en lugar de volver con el Ranger Morris y compartir la gloria, te quedas a vivir en el oasis con unas trillizas beduinas que te llevan a las estrellas.
+proc final_loc
+end
+
+:67
+proc page_number
+pln El chino te recuerda al camarero del "Gatito Feliz" un restaurante asiático donde sueles llevar a todos tus ligues, así que vas tras sus pasos.
+pln La puerta da a un callejón bastante sucio que desemboca en una inmensa avenida repleta de locales con grandes carteles luminosos anunciando todo tipo de espectáculos. Paras a un transeúnte y le preguntas dónde estás.
+pln - Oh, ¿es nuevo aquí? Bienvenido a un lugar donde nada es real, bienvenido a... Broadway - responde con una sonrisa de una forma tan melódica que de un momento a otro esperas que aparezcan bailarines de tras los cubos de basura y que una pegadiza melodía inunde la atmósfera con sus notas.
+pln Pero el transeúnte continúa su camino sin más y tú haces lo mismo. Tras dudar entre varios musicales, decides entrar en uno llamado "<span lang="en">Cats</span>".
+pln Durante casi dos horas contemplas a un grupo de felinos haciendo el chorra sobre el escenario. Te encanta. Tu adicción a la obra es tal, que cuando Asparagus se parte la tibia en una representación, te presentas al casting para sustituirle, consigues el papel cosechando ese año varios premios Tony.
+proc final_loc
+end
+
+:68
+proc page_number
+pln Tu tatarabuelo, que luchó en Vietnam, siempre te decía que no hay que fiarse de los amarillos, así que continúas abriendo puertas al tun tun, con escaso resultado hasta que detrás de una, encuentras al chino atrapado en un sofá de skay.
+pln Ante la promesa de ayudarle a salir del apuro, Chu-lin te pone tras los pasos de Zipple. Ha huido por la puerta con el número 7 aunque de eso hace varios minutos. Tras ella encuentras un colorido mundo repleto de tuberías y ladrillos habitado por pequeños champiñones andantes.
+pln Se te acerca una tortuga bípeda con un casco de rugby. Te quedas petrificado por la sorpresa cuando de repente te lanza un boomerang, que te hubiera dado de lleno en la cara de no ser porque alguien o algo te empuja en el último momento, tirándote al suelo, desde donde ves como un tipo bajito vestido de rojo y azul aplasta a la tortuga de un salto y se pierde en el interior de una tubería.
+pln Como no te apetece descubrir más cosas de ese lugar, te metes en la tubería más cercana y apareces en el exterior de la discoteca.
+pln El ranger Morris ha atado a los maleantes y se está fumando un cigarro habano. Con cierta culpabilidad le informas de que Zipple ha escapado.
+pln - No importa, uno de estos malnacidos me ha soplado a dónde se dirige. Por lo visto quiere recuperar los objetos alienígenas que encontró en una reserva india y largarse del planeta.
+pln Cabalgando sobre dos caballos biomecánicos, no tardáis en llegar a la entrada de la reserva donde os espera un auténtico nativo americano, con sus plumas y todo.
+pln - Jau, mi ser "Torito Guapo", pero no tan guapo como tú - puntualiza mientras te guiña el ojo.
+pln Le comentáis los planes de Zipple, o como es conocido en la reserva: "Cordón Bleu". Es muy sibarita, apostilla Torito Guapo. Os deja entrar, pero antes tendrás que ponerte un nombre indio. Son las normas.
+btn 79, Si eliges "Cucurrucucú paloma", vuela al nido 79.
+btn 81, Si te pones por nombre "Pinito del oro", da un salto mortal sin red al 81.
+proc intermediate_loc
+end
+
+:69
+proc page_number
+pln No te cuesta mucho encontrar a alguien que te lleve. En el utilitario del señor Yorck, un simpático publicista, llegas en un santiamén al concierto. Has tenido una suerte tremenda al encontrártelo, Dick tiene un par de pases VIP, pero su mujer no ha podido acompañarlo, así que te ofrece el que le sobra. El viejo encanto de Jim vuelve a funcionar.
+pln Te paseas entre bastidores gorroneando bebidas y canapés mientras aprovechas para hacer contactos con la gente del mundillo. Nunca se sabe cuándo puede picarte el gusanillo de la música.
+pln Entre un mar de aplausos, Mariah Zuley sale al escenario. Empiezas a aplaudir tú también como un loco, no puedes creer que estés allí junto a esa pedazo de artista. Alzas la cabeza en un triste intento por contrarrestar las lágrimas de emoción que afluyen a tus ojos. Es entonces cuando le ves.
+pln En el entramado de hierros y cables de los que penden los focos, lejos de cualquier luz, se agazapa un tipo vestido de blanco en cuyas manos porta un sospechoso bote. Tu sentido arácnido te indica que Mariah Zuley está en peligro.
+pln Veloz como el mono que te robó la cartera en Gibraltar en tu visita al Museo de la Hispanidad durante el parvulario, te encaramas a los hierros. El tipo se percata de tu presencia y empezáis a forcejear, terminando los dos cayendo sobre las tablas delante de más de 10.000 vociferantes espectadores que piensan que todo forma parte del espectáculo.
+pln A tu izquierda ha caído el bote del terrorista. No era ácido, como pensaste en un primer momento, sino un líquido negro y espeso que se diluye entre las rendijas de la tarima.
+pln - ¿Quién eres?- preguntas al asaltante, que yace inmovilizado por tus fuertes brazos.
+pln - Soy miembro del "Movimiento para la liberación de la música de la tiranía de las tías buenas". Y quiero un abogado.
+pln - Y yo quiero dos penes, pero el Colegio Galáctico de Médicos se niega a implantarme otro. Bienvenido a la vida real, mocoso.
+pln Le esposas al batería, que bien podría pasar por el eslabón perdido entre el simio y el orangután, y te diriges a Mariah Zuley, que hasta entonces se había limitado a contemplar la escena en estado de shock, para ver si se encuentra bien.
+pln - Oh, muchas gracias. Me has salvado la vida - exclama mientras se funde en un intenso abrazo contigo.
+pln - En realidad no ha sido nada, cualquiera hubiera hecho lo mismo. Además, creo que lo del bote era pintura.
+pln Un poco de modestia siempre viene bien a la hora de ligar.
+pln - Mucho peor. ¿Qué sería de mi carrera sin mi preciosa cara? Es el complemento perfecto para mi voz. ¿Qué hacían los patanes encargados de vigilarme?
+pln Los busca con la mirada sin demasiado éxito
+pln - Vaya, parece que se han largado. Jim a partir de ahora serás mi guardaespaldas personal y no quiero una negativa por respuesta.
+pln Cuando vas a preguntarle cómo sabía tu nombre, te lanza una mirada tan amenazadora que hace que sigas callado. No puedes rechazar la oferta.
+pln Eres la sombra de Mariah Zuley durante varios conciertos. A medida que pasan los días, te vas ganando su confianza y pronto te conviertes en alguien indispensable para ella, que tan pronto le va a buscar un capuchino a las cinco de la mañana, como ejerce de paño de lágrimas.
+pln El próximo concierto será en Cinha. Preparas meticulosamente el viaje, pues los habitantes tienen fama de ser algo violentos. Todo va bien hasta mitad del espectáculo. La asistente personal de Mariah Zuley viene corriendo hacia ti con malas noticias: Ha perdido al perro de la cantante. Ese perro es lo que más quiere Mariah Zuley en todo el mundo, conocer la noticia sería un duro golpe para ella, pero si luego se entera de que se lo ocultaste...
+btn 73, Si se lo dices sin paños calientes, ¿podrías venir a mi casa y decirle a mi madre que quiero ser funambulista? Pero antes, pasa al 73.
+btn 74, Si esperas a que termine el concierto, no te comas las uñas en el 74.
+proc intermediate_loc
+end
+
+:71
+proc page_number
+pln No te fías de los habitantes del planeta, así que decides ir andando. Es una buena forma de amortizar las nanopiernas que te implantaste para poder entrar en el cuerpo. Aun así, el agobiante clima del planeta, con temperaturas de más de 40 grados, va minando tu moral, que cae por los suelos al pasarte a toda velocidad un autobús repleto de frescos pasajeros. ¿Por qué no se te ocurrió usar el transporte público o alquilar un vehículo? Qué más da, estás en mitad de ninguna parte, harto de andar.
+pln Lo único que te queda es arriesgarte y parar a alguien. Varios coches pasan de largo sin hacerte caso, incluso un camión con la carlinga rosa, lo cual te ofende más si cabe.
+pln Como hacer dedo no funciona nunca a menos que seas una mujer, te tumbas en la carretera. Eres muy radical, ¿no?. Pronto oyes un chirrido intenso: una furgoneta ha parado. En el interior se apiñan cuatro jóvenes con kimonos blancos.
+pln - Hola, saludas alegremente. ¿Podríais llevarme?
+pln - Claro, amigo. ¿Dónde vas?
+pln El que te contesta es un chico albino con los ojos rosas, bastante siniestro.
+pln - Voy al concierto de Mariah Zuley, espero no llegar tarde.
+pln De pronto la furgoneta estalla en carcajadas.
+pln - Creo que llegas un poco tarde, aparte de que vas en dirección contraria. El concierto ha sido suspendido.
+pln - ¿Le ha pasado algo a Mariah Zuley? - no podrías aguantar que le hubiera pasado algo.
+pln Los jóvenes vuelven a reírse como hienas ante una película de Jim carrey.
+pln - Digamos que alguien ha echado el telón sobre ella.
+pln - ¿Qué quieres decir?
+pln La pregunta parece molestar al albino, que tuerce el gesto.
+pln - Eres un poco corto. Hemos boicoteado la actuación, le hemos lanzado un bote de brea y luego la hemos enrollado con el telón.
+pln - ¿Pero por qué? ¿Qué daño os ha hecho?
+pln No puedes creer que haya alguien en el mundo capaz de odiar a alguien con unos rizos dorados que serían la envidia de Atenea.
+pln - Tengo que advertirte de que estás ante el "Movimiento para la liberación de la música de la tiranía de las tías buenas": el MPL...MDLD...L...TB. Todos los miembors en algún momento hemos trabajado a las órdenes de Mariah Zuley. No es como aparenta ser ante las cámaras, es una bruja paranoica que ve enemigos por todas partes. Una vez me pilló viendo un reportaje de ella y creyó que trabajaba para ella como agente encubierto. Me echó de su mansión a latigazos mientras me perseguía ese horrible perro suyo.
+pln - Es una súper estrella, pero como todo el mundo, tiene el derecho a comportarse como una hija de perra. Vale que sea maleducada, que ese pelo rubio sea más falso que un billete de 100 mortadelos, que esté más operada que el rey Freezer, pero coño, la máquina que canta por ella lo hace muy bien.
+pln Tu perorata sin sentido no convence a los terroristas. Entre todos te suben a la furgo y de un golpe te dejan inconsciente. Te despiertas en mitad de un tippi indio rodeado por varios jóvenes. El albino toma de nuevo la palabra.
+pln - No somos asesinos, solo queremos que veas la verdad. ¿Quieres conocer como es realmente Mariah Zuley?
+btn 82, Si permaneces fiel a tu criterio, serás nombrado grupi del año en el 82
+btn 83, Si le das una oportunidad al albino, ajústate la gabardina de cuero y ponte las gafas, antes de pasar al 83.
+proc intermediate_loc
+end
+
+:73
+proc page_number
+pln Coges el micro con fuerza y pones tu voz más despreocupada.
+pln - Mariah Zuley, no ha pasado nada grave así que no te asustes, ¿eh?- Ella te escucha por el pinganillo que lleva al oído y por el cual recibe las instrucciones. - Tu perro ha desaparecido pero no te preocupes, ya he puesto a la policía al corriente y lo están buscando.
+pln Durante unos segundos parece que Mariah ha asimilado bien lo que le dices, pero no es más que un espejismo. Pronto se para en el escenario. Por fortuna el encargado del playback ha estado atento y no se ha notado mucho.
+pln Al borde del llanto, se dirige al público.
+pln - Por favor - implora -, ¿alguno de los presentes ha visto a "Mistetas"?
+pln Escondido entre el público alguien se atreve a responder.
+pln - No, pero me gustaría verlas.
+pln La cascada de flashes que acontece a continuación ilumina la noche mientras las carcajadas se pierden en el vacío estelar.
+pln Mariah Zuley no entiende nada, pero sigue hablando.
+pln - Es pequeñito…
+pln Más risas y algún que otro comentario de alguien que no está de acuerdo con esa afirmación.
+pln - Suave…
+pln El público aplaude en señal de afirmación y el mismo de antes pide comprobarlo.
+pln - Si lo coges parece que se te vaya a escurrir entre los dedos…
+pln Los 35.000 espectadores enmudecen.
+pln Es suficiente, sales al escenario y te la llevas de allí antes de que un líquido pegajoso lo inunde todo. Involuntariamente la has salvado de un ataque terrorista con huevos.
+pln Al día siguiente, analizáis las consecuencias de lo ocurrido la noche anterior. Unos opinan que lo mejor es seguir con la gira y otros que lo mejor es desaparecer por un tiempo hasta que se calmen las cosas. Por fortuna, encontraron a Mistetas escondido bajo una mesa.
+btn 77, Si crees que lo mejor es desaparecer, esfúmate en el agujero 77.
+btn 78, Si continuas con la gira, que no pare el Rock and Roll en la gira 78.
+proc intermediate_loc
+end
+
+:74
+proc page_number
+pln No sabes cómo reaccionará ante la noticia, ese perro es el ser vivo al que más quiere. Esperas a que termine la última canción y ya en la limusina de camino al hotel le informas de lo ocurrido. Permanece en estado catatónico hasta que llegáis a la habitación.
+pln Una vez allí, ve la camita de Mistetas y reacciona. Pierde los nervios y empieza a destrozar los muebles. Está fuera de sí. Cuando no queda nada de una pieza, sale al pasillo y empieza a llamar a todas las puertas. En la de enfrente le abre un señor mayor, Mariah Zuley le pregunta si ha visto a Mistetas. El hombre con una sonrisa pícara responde que ya le gustaría, y probarlas además, apostilla antes que Mariah Zuley le suelte un puñetazo y empiece a destruir su habitación.
+pln Cuando Mariah va por la sexta estancia arrasada, la dirección del hotel llama a la policía. La destrucción sobrepasa los límites permitidos a una estrella de rock.
+pln Tras aparecer en Cops, el programa de televisión protagonizado por los criminales más peligrosos, y pasar la noche en una fría celda, Mariah Zuley parece más calmada. Le pagas la fianza y le comentas la buena noticia; Mistetas ha sido encontrado. No te esperabas su reacción. Con una gélida mirada, te despide por no haberle informado de la desaparición en su momento.
+pln - Estoy cansada y enferma de incompetentes. Sé que andas tras una de mis chicas. No quiero que te acerques a ninguna de ellas, de lo contrario sabrás quien soy yo.
+btn 75, Si pasas de su consejo, pasa al 75, tío duro.
+btn 76, Si le haces caso, aparte de un blandengue, tendrás que pasar por el 76.
+proc intermediate_loc
+end
+
+:75
+proc page_number
+pln No te asusta lo que una estrella del pop pueda hacerte. Le dices que dejarás a sus amigas en paz, pero llamas a la rubia de todas maneras.
+pln Quedáis para tomar un café en una cafetería del centro, de la cual te llama la atención que no haya apenas nadie a las cinco de la tarde, salvo Abela, una de las veinte maquilladoras de Mariah Zuley y la única que te ha robado el corazón.
+pln Pasáis un rato agradable entre arrumacos y confidencias, hasta que un grupo de hombres ataviados con anticuados trajes entran en el local. Los pocos clientes que había y los camareros salen corriendo.
+pln Uno de los trajeados se adelanta para hablar con vosotros. Te fijas en que tiene una fea cicatriz a lo largo de su mejilla derecha.
+pln - Mariah Zuley te dejó bien claro que no tuvieras contacto con ninguna de sus conocidas
+pln Su voz es grave y rasposa como si se hubiera fumado un paquete de celtas minutos antes.
+pln - ¿Cómo nos han encontrado?
+pln Abela está asustada, se ve que los conoce de antes.
+pln - Tendrías que saber que Mariah tiene todos los teléfonos de sus amigas y empleadas pinchados, señorita Karol. Sr J, ahora va a pagar el haber desobedecido las órdenes de M.
+pln Desesperado, utilizas un viejo truco que has visto en innumerables películas.
+pln - No me haga nada, le pagaré el doble. No, el triple.
+pln - Muchacho, ¿has visto las perolas de Mariah Zuley? Por mí como si nos pagaras con palomitas de maíz, uno no se puede negar a las órdenes de una mujer con ese par de tetas.
+pln Lo ves todo perdido. Buscas la mirada de consuelo de Abela antes de la paliza que te espera, pero por contra te mira con una seguridad turbadora y no porque a ella no le vayan a partir la cara, como piensas, sino porque en ese mismo instante, decenas de jóvenes con kimonos blancos atraviesan puertas y ventanas y se enzarzan en una cruenta pelea con los sicarios de Mariah Zuley.
+pln Abela y tú aprovecháis para salir de allí sin que os descubran. Una vez estáis en lugar seguro, Abela te confiesa que es una agente encubierta de una extravagante organización que busca terminar con la carrera musical de Mariah Zuley entre otras. Por amor, te unes al grupo y juntos planeáis vuestra venganza final contra la mujer que ha estado a punto de matarte.
+proc final_loc
+end
+
+:76
+proc page_number
+pln El ultimátum de Mariah Zuley te ha parecido demasiado serio como para no tenerlo en cuenta.
+pln No quieres causarle ningún problema a Audirne, una de las mejores amigas de Mariah Zuley. La quieres demasiado como para inmiscuirla en el pérfido juego de la cantante. Sin decir adiós ni dejar una nota, te vas lejos, muy lejos.
+pln Consigues trabajo en una agencia de seguros. Para cualquiera que te vea, puede parecer que estás rehaciendo tu vida poco a poco, pero jamás podrás olvidar la sonrisa de Audi por las mañanas al servirte el desayuno, el olor de su pelo, la suavidad de su piel...
+pln Te vas abandonando día a día, hasta que una tarde, una montaña de envases de comida congelada que guardabas en la cocina se derrumba sobre ti, acabando con tu vida.
+pln Precisamente el día en que conseguiste tu mayor logro al vender un seguro de vida a un tal Mcleod, mueres como naciste: solo y con las pelotas congeladas.
+proc final_loc
+end
+
+:77
+proc page_number
+pln Lo mejor es desaparecer una temporada hasta que la situación se normalice. Empaquetas algunas cosas y Mariah Zuley y tú os vais a una cabaña que ella posee en su planeta natal: Hystaeria. Allí pasáis el invierno.
+pln Los primeros días, la antipatía de Mariah Zuley dificulta la convivencia, pero de siempre se ha dicho que el roce hace el cariño y vosotros os rozáis más que un pervertido en el metro. El amor termina por florecer.
+pln Con la llegada de la primavera os casáis, pero ya desde la luna de miel, Mariah empieza a hacerte la vida imposible cuando sonríes a la recepcionista del hotel. Los celos la consumen incluso cuando llamas a tu madre.
+pln Volvéis del viaje cada uno por su lado. No os podéis ni ver. El divorcio es beneficioso para ti. El juez te otorga la mitad del patrimonio de ella, el cual dilapidas hasta que en un ataque de rabia Mariah Zuley te tira a la cabeza un piano de cola una fría mañana de septiembre. El azaroso movimiento de las teclas con el impacto producen las primeras notas del Requiem de Bach.
+proc final_loc
+end
+
+:78
+proc page_number
+pln Cedes a la presión de la discográfica y los fans. La gira galáctica de Mariah Zuley debe continuar y lo hace con normalidad.
+pln Contrariamente a lo que pensabas, «¿Alguien ha visto “Mistetas”?» como califican los periódicos al incidente, ha catapultado la fama de la cantante. Diariamente recibe en su buzón propuestas de diversas revistas, desde Playboy hasta "Caza y pesca" para que pose desnuda en sus páginas. Cuando las cifras que ofrecen por el posado empiezan a ser jugosas, le informas de las propuestas.
+pln - Jamás posaré desnuda - responde indignada. - Mi cuerpo es mío y no quiero que nadie lo vea, ni siquiera yo. ¿Por qué crees que me cambio de ropa con la luz apagada?
+pln - Piénsatelo un poco al menos, hace semanas que no recibimos ofertas para que actúes. Nos acercamos peligrosamente a la bancarrota.
+pln No te gusta mentirle, podrías nadar en dinero si no raspara tanto, pero pagarías lo que fuera por verla desnuda.
+pln - Un momento - de la indignación pasa a la sorpresa -, ¿quieres decir que lo único que le interesa a la gente de mí, es mi cuerpo?
+pln - ¿Acaso no lo sabías? - ahora tu sorpresa es mayor que la suya. - Bienvenida a tu verdad.
+pln La reunión termina ahí. A la mañana siguiente encuentras sobre tu mesa una carta de Mariah Zuley en la que se despide de todo el equipo. Se ha largado con los Amish para tratar de encontrarse a sí misma.
+pln - Una pena - le escuchas decir a un crítico musical cuando conoce la noticia. - Tenía un bonito culo.
+proc final_loc
+end
+
+:79
+proc page_number
+pln Como si alguien te hubiera insuflado ese nombre en el cerebro, eliges "Cucurrucucú Paloma". Más allá de los confines del universo, un ser calvo con pajarita que os ve a través de un monitor sonríe y le comenta a su compañero:
+pln - ¡¡Qué jugón, Daimiel!!
+pln A torito guapo, por el contrario, no parece agradarle, así que os dice que sigáis las señales de humo que se adentran en la reserva y vuelve a su garita para continuar viendo "Santa Bárbara".
+pln No tardáis en llegar al casino de la reserva: "El Cherokee Afortunado". Entráis en busca de alguna pista, pero al pasar junto a una mesa donde se juega al Bacarrá, un participante tiene la pésima idea de comparar una mala jugada con cierta serie sobre un Ranger de Texas.
+pln Rezas para que Chuk no lo haya escuchado, pero él lo escucha todo y cuando su cabeza gira 180º en busca de su objetivo, sabes que es el momento de salir por patas.
+pln Bien parapetado tras un tótem a varios metros del edificio, ves cómo este salta por los aires, dejando tras de sí un amasijo de escombros y una gran nube de humo que cuando es disuelta por el viento, deja entrever la figura del Ranger Morris en medio de la devastación.
+pln Casi al instante te llega el sonido de un montón de tambores siendo aporreados furiosamente.
+pln - Son los indios, creo que se han enfadado - grita Chuk -. Rápido, a los caballos, los protege el sindicato, no puedo ponerles las manos encima.
+pln Montáis sobre vuestras monturas y huis del sonido de los tambores. Tras descartar esconderos en un cementerio indio, en un pueblo fantasma indio y en el Taj Mahal, os topáis con una montaña india en la que se aprecian signos de vida no-indios: decenas de cajas de preservativos esparcidos por los alrededores.
+pln Apremiados por los aullidos de los furiosos nativos-klamtianos que os persiguen, entráis en la montaña por una inmensa abertura en su base. Por dentro está totalmente hueca. En su interior reposan los restos de una antigua ciudad cuya arquitectura os es desconocida.
+pln En la avenida principal que divide la ciudad en dos, encontráis un extraño vehículo en cuyo lateral izquierdo se puede leer: R5. A pocos metros os topáis, mejor dicho, tropiezas con el cuerpo sin vida de Zipple.
+pln Chuk analiza el cadaver. La causa de su muerte es desconocida, quizá si conservara la cabeza podríais averiguar cómo murió, aunque algo te dice que el propietario del rugido que acabas de escuchar a tu espalda ha sido el causante.
+pln Efectivamente, al girarte ves la pequeña cabeza de Zipple colgando de la boca sanguinolenta de una criatura que jamás habías visto: una inmensa bola peluda cuya boca alberga dos hileras de afilados colmillos.
+pln De inmediato Chuk empieza a pelear contra ella. Las patadas giratorias no parecen surtir efecto en el peludo ser, que recibe cada golpe como si fueran caricias. A duras penas, Chuk esquiva las dentelladas del animal y los zarpazos con los que intenta arrancarle algún miembro.
+pln Solo hay una única posibilidad de salir vivo del encuentro. Te apremia a que huyas del lugar, cosa que haces en el R5 tras cargarlo de los objetos que te parecen más valiosos, y dejas al Ranger Morris abandonado a su suerte.
+pln Los dos, monstruo y ranger, se estudian cuidadosamente, uno frente a otro.
+pln - Ha llegado tu hora, sucio monstruo del averno, nadie resiste una patada voladora de Chuk Morris y continúa con vida.
+pln En el momento en que arrollas a un puñado de indios que os esperaban apostados en la entrada de la montaña, sagrada para ellos, Chuk utiliza su arma secreta: se quita el sombrero de cowboy, bajo el cual se esconde un cañón de neutrinos con el que dispara al extraño ser.
+pln Todo en un radio de 2 kilómetros alrededor de la montaña se hunde en la tierra, creándose un abismal agujero cuyo fondo es imposible vislumbrar.
+pln Vuelves a la ciudad. Hasta allí han llegado los ecos de la explosión. Todos piensan que has derrotado al legendario Ranger Morris y como tal eres recibido como un héroe, siendo respetado donde quiera que vayas, incluso te invitan a cerveza en todos los bares.
+pln En el mismo lugar más allá de los confines del universo, el mismo calvo con pajarita vuelve a sonreír, y antes de apagar el monitor no le queda más que decir:
+pln - La vida puede ser maravillosa, Salinas.
+proc final_loc
+end
+
+:81
+proc page_number
+pln Que se le va a hacer, nunca has tenido mucha imaginación para los nombres. Tu perro Bobby seguro que piensa igual. Además, los nombres buenos ya están cogidos: Caballo loco, Jerónimo, Picha brava...
+pln Parece ser que el primo de Torito estuvo trabajando varios meses en la excavación de Zipple, hasta que este echó a todos los trabajadores tres días atrás. Vais en busca de "Amila Hierba", el primo de Torito que tiene un huerto a varios kilómetros de allí, junto a la autopista que atraviesa la reserva por lo que no os es muy difícil encontrarlo.
+pln En un puesto ambulante al borde la calzada se encuentra, rodeado de macetas, Amila. No sabe mucho sobre lo que había allí. Él solo era el encargado de subir la moral de los trabajadores, nunca echó un vistazo a las ruinas ni a las instalaciones subterráneas que, según se rumoreaba, encontraron bajo ellas. Lo único que puede hacer por vosotros es daros la dirección, pero antes tenéis que comprarle algo.
+pln Con un par de macetas para regalárselas a tu madre, os dirigís hacia la excavación extrañamente alegres, incluso los caballos, que en un descuido se comieron un par de hierbajos de Amila, parecen más animados que de costumbre.
+pln Con las ruinas a pocos metros de distancia, descendéis de los caballos y os acercáis a pie para no ser descubiertos, Chuk con su escopeta, a la que cariñosamente llama SaraJuana. El único arma que llevas tú es un ridículo láser con forma de mando a distancia que comparado con el inmenso cañón del rifle de Chuk parece... Bueno, parece un mando a distancia, pero como dice las mujeres piadosas, el tamaño no importa.
+pln Ocultos por los restos de lo que en su día parece que fue una biblioteca, echáis un vistazo a los alrededores. En el centro de la excavación ruge un inmenso generador cuyos cables se pierden en una cilíndrica abertura en el suelo. Echáis un vistazo abajo, pero está demasiado oscuro.
+pln - Zipple tiene que estar ahí. - Más que hablando contigo, Chuk parece pensar en voz alta. - Sería demasiado peligroso descender sin ni siquiera una vela, podría mancharme el traje.
+pln De pronto empieza a rascarse furiosamente la nariz, como si se le hubiera metido una mosca.
+pln - Ya lo tengo Jim, tengo un plan. Rápido, dame las plantas que has comprado.
+pln Con tu láser les prende fuego y las tira en el interior de la abertura. Antes de que lleguen al fondo ya estáis bien seguros tras un enorme pedrusco. Como Chuk esperaba, Zipple no tarda en salir bastante perjudicado, no deja de moverse de un lado a otro visiblemente mareado. Chuk se abalanza sobre él y de un pestañazo lo tumba.
+pln La organización está descabezada, en un par de días caen los demás miembros de la banda. Con la satisfacción de haber cumplido con tu deber, vuelves a la "Espacio exterior 1", pero en cuanto ves al teniente recuerdas que tienes una cuenta pendiente con él…
+proc final_loc
+end
+
+:82
+proc page_number
+pln - Necesitaréis echarme el humo de vuestros canutos si queréis que os crea - gritas con la esperanza de que se lo tomen al pie de la letra, pero no es así.
+pln Puedes percibir caras de tristeza en algunos de los jóvenes que van abandonando el tippi hasta que solo quedáis el albino y tú.
+pln - No es seguro que estés aquí. Dentro de una hora te trasladaremos a nuestra base y ya veremos qué hacemos contigo.
+pln Cuando pasa el tiempo establecido, un par de fortachones te cogen en brazos y te tiran a la parte trasera de una vieja ranchera. Tras un corto viaje, te encierran en un almacén que parece abandonado. Te dejan allí, atado de pies y manos.
+pln Cae la noche, el suave canto de los grillos facilita tu sueño hasta que una explosión en el exterior te saca del duermevela. Escuchas el ajetreo del gentío yendo de un lado para otro confundiéndose con el sonido de las explosiones y de los gritos de dolor.
+pln El bullicio se va intensificando, como si se estuviera acercando a donde estás. La puerta del almacén salta por los aires y la figura de un tipo con sombrero vaquero, botas de montar y una barba bien perfilada, se recorta en la puerta.
+pln - Ranger de Klam, dense todos por detenidos. - grita el vaquero.
+pln Antes de que puedas decir nada, dos de tus captores saltan sobre el intruso, que no tarda en deshacerse de ellos de sendas patadas giratorias. Pero algo anda mal, pues no puede dejar de lanzar patadas al aire y se acerca peligrosamente a ti.
+pln Lo último que ves antes de caer inconsciente, es el número que calza el ranger: "54".
+proc final_loc
+end
+
+:83
+proc page_number
+pln Para convencerte de la maldad de Mariah Zuley, la sigues junto al grupo de terroristas todo un día, lejos de las cámaras, los flashes y los fans.
+pln La amabilidad, las sonrisas, la predisposición a hacerse fotos con sus seguidores... todo fachada. En solo unas horas pateó a un camarero, insultó a una señora cuyo perro pasó demasiado cerca de ella, tiró un cigarrillo a un bosque e hizo varias barbaridades más que destruyeron la imagen angelical que tenías de ella.
+pln Apenado porque ya no quedan artistas merecedores de admiración, vuelves a tu triste vida sin ninguna emoción.
+proc final_loc
+end
+
+:84
+proc page_number
+pln En un principio la amenaza os detiene, pero cuando comprobáis que os están apuntando con croissants, dejáis de tomarlos en serio.
+pln Mientras el oficial se desgañita intentando intimidaros, el robot termina de cargar las botellas.
+pln El oficial ordena entonces el ataque, produciéndose una desbandada de los soldados vivelafranceses en dirección contraria a donde os encontráis.
+pln Decepcionado porque no va a haber acción, subes a la nave. Esta despega para poner rumbo a nuevos lugares que visitar y rapiñar. Al menos os pondréis ciegos en el camino.
+pln Ese mismo día, los vivelafranceses esculpen una nueva frase en su arco del triunfo: "Los pigatas son unos caguetas."
+proc final_loc
+end
+
+:85
+proc page_number
+pln El alboroto hace que Pitt salga a ver qué está ocurriendo. Al ver los croissants palidece al instante.
+pln - Haced lo que dicen, todo el mundo a hacer el dichoso examen.
+pln Le preguntas a Jasmine el porqué de la actitud del capitán: resulta que es alérgico al gabacho bollo.
+pln Como es de esperar en semejante grupo de analfabetos, ningún miembro de la tripulación logra aprobar, a excepción de Jasmine. Debéis quedaros todo el verano estudiando el idioma en un liceo para hacer la recuperación en septiembre.
+pln Cierto día de julio, os llevan de excursión a una de las 84 París que existen en el planeta. Pronto te separas del grupo y recorres a tu aire la ciudad de las luces extasiado por la belleza de sus edificios, el aroma a rosas que impregna el ambiente y la amabilidad de la gente.
+pln Cuando llegas a la Torre Eiffel alzas la cabeza para poder verla entera, con tan mala suerte que chocas con una chica que paseaba pizpireta con una baguette bajo el brazo. Cuando os miráis a los ojos el flechazo es instantáneo.
+pln Pasáis toda la tarde en <span lang="fr">Chez Renée</span>, un pequeño café a pocos metros de la torre, hablando de lo divino y de lo humano. Ella te cuenta que está de visita en el planeta por cuarta vez, pero le gusta tanto la ciudad que ha decidido quedarse a vivir. Le comentas falsamente sorprendido que tú también pensabas hacer lo mismo, a los dos se os iluminan los ojos.
+pln Con la luna como testigo, selláis vuestro amor con un beso en un pequeño recoveco de los Campos Elíseos. Te despiertas la mañana siguiente en su piso, que se convertirá en tu hogar a partir de entonces, pues pocas semanas después os casáis y vivís felices para siempre.
+proc final_loc
+end
+
+:86
+proc page_number
+pln En la habitación en penumbras, no se oye ni el aliento de una mosca. Después de haber escuchado durante varios minutos los gritos suplicantes de una mujer, el misterioso hombre que espiaba tras la puerta la abre con cuidado de no hacer ruido.
+pln Se acerca a la cama donde duerme la prostituta y descarga su láser sobre el bulto que está junto a ella. Pero en lugar del característico olor a pollo quemado que dejan los cadáveres, huele a plumas quemadas.
+pln En ese momento saltas desde el rincón donde te escondías y golpeas al intruso con una pierna ortopédica que había por allí, desarmándolo. De un golpe seco en la nuca lo dejas inconsciente en el suelo.
+pln Cuando recupera el conocimiento, le interrogas. Es el agente Winslow, afromexicano, veinte años, recién salido de la academia. Por lo visto ha recibido órdenes del teniente Rodgers de matarte. Le indicó que te encontraría en ese sitio.
+pln - Así que la chica no se acercó a mí porque llevo unos pantalones con tres tallas menos de lo normal. - Piensas en voz alta decepcionado.
+pln - Pues no, fue todo un plan del teniente. Un plan casi perfecto si se me permite decirlo, pero no contaba con su astucia, inspector Jim.
+pln - Ahora soy agente, hijo.
+pln Su cumplido hace que enfoques tu ira totalmente hacia el teniente.
+pln Extrañado, Winslow te señala a la prostituta que pese a todo el jaleo aún permanece dormida.
+pln - Les pasa a todas las que tienen el honor de recibir mi báculo en su templo del amor. Dentro de ocho horas se despertará con una sonrisa de oreja a oreja, con una cierta dificultad para cerrar las piernas y el...
+pln - Es usted un pervertido - exclama Winslow.
+pln - ¿Qué? ¿Envidia? Pues cuidado a ver si te van a confundir con una berenjena.
+pln - ¿Qué?
+pln - Verde por arriba, negro por abajo…
+pln - Pero oiga ¿cómo se atreve? le denunciare a la fundación Spike Lee contra el racismo.
+pln - ¡¡¡Coño, tú has intentado matarme!!!
+pln - ... Bueno, estamos en paz, pero que conste que no salió de mí. Fue el teniente, que quería hacerle pagar el que usted sea el causante de que en la comisaría todos le digan Bullwinkle.
+pln - Ese asqueroso saco de mierda - murmuras para ti mientras notas como la ira se apodera de tu cuerpo.
+pln - Ya es hora de darle su merecido al teniente - le dices a Winslow.
+pln Abandonáis el edificio sin tener muy claro cómo llevar a cabo vuestra venganza.
+image img/6.jpg|Habitación urbana acogedora
+btn 89, Si intentas implicarlo en un asunto de drogas, sácate una papelina del bolsillo y colócala en el bolsillo 89.
+btn 91, Si te lo piensas mejor y crees que el teniente tiene razón en querer matarte, vete de cañas. Ahoga tus penas en el bar 91.
+proc intermediate_loc
+end
+
+:88
+proc page_number
+pln Los estudios demuestran que la efectividad de la marcha atrás es muy baja y no sirve como protección ante enfermedades tales como el SIDA o la sífilis (que por cierto es bastante dolorosa).
+pln Has cometido un error imperdonable. A partir de hoy, procura llevar siempre un preservativo en la cartera y que no se te olvide cambiarlo cada tres meses, porque caducan.
+pln Aquí se termina la historia. Alégrate porque en la vida real, la legión extranjera no acepta padres fugitivos. Ahora mismo coge y ve a tu centro de planificación familiar más cercano.
+proc final_loc
+end
+
+:89
+proc page_number
+pln Si algo has aprendido de las películas de policías, es que la cocaína hay que probarla para descartar que sea harina o matarratas, y que no hay nada como el tráfico de drogas para desacreditar a un poli. Por aquello de que el teniente ha querido matarte, lo mejor es no aparecer por la comisaría, tendrás que pedirle ayuda al agente Winslow.
+pln - Tío, estás loco - te responde cuando le comentas tu plan de esconder un paquete de droga en el maletín del teniente. - ¿Y qué gano yo con eso?
+pln - Te daré la libertad y no tendrás que recoger más algodón... ¿Tengo que recordarte que intentaste matarme?
+pln - Joder macho, que rencoroso, antes quedamos en paz.
+pln - Además, el teniente se acuesta con tu hermana. - Añades con la esperanza de que no ponga más pegas.
+pln - Entonces lo siento por el teniente.
+pln Te dejas de tonterías y prometes que le darás un palé de pantalones de campana que requisaste el mes anterior.
+pln - Vale, pero como no reciba un solo pantalón te las verás conmigo. Y bien, señor "has intentado matarme ahora eres mi esclavo", ¿de dónde vamos a sacar la droga?
+pln Por suerte en tu casa guardabas varios kilos... El motivo no importa. Se los das a Winslow, este entrará en la comisaría, aprovechará un descuido del teniente para colarle la droga y cuando lo haga te hará una señal desde la ventana.
+pln A los pocos minutos, ves a Winslow agitar los brazos aparatosamente con medio cuerpo en el vacío, la señal convenida. La droga está en su sitio y el teniente está a punto de volver a casa. Haces una llamada a los de asuntos internos y les das el chivatazo. Con eso sería suficiente, pero quieres humillar a Rodgers en persona.
+pln Lo interceptas en el aparcamiento, justo cuando está a punto de entrar en su coche.
+pln - Quieto ahí, Phil - le dices en voz baja mientras lo encañonas con tu pistola. - No te muevas ni un centímetro o tendré que disparar.
+pln - Pero que co...
+pln El sonido de las sirenas acercándose engulle la última frase del teniente. Los de A.I. se han dado prisa. Es hora de empezar el espectáculo.
+pln Te separas varios metros del teniente sin dejar de apuntarle. Una vez que compruebas que todos los policías han abandonado sus vehículos y que han apagado las sirenas, te diriges a Rodgers.
+pln - Soy el fin de tu loca ambición. - Gritas bien fuerte para que te escuchen todos.
+pln - ¿Qué significa todo esto Jim? (está confuso, no deja de mirar de un lado a otro) ¿De qué ambición me hablas, de la de acostarme con una mujer de cada planeta? Tú me convenciste para hacerlo, mamón.
+pln Dejas que sean los otros los que registren el maletín del teniente, encontrando la cocaína que escondió Winslow. Por mucho que intenta defenderse alegando que todo ha sido una trampa, es detenido. Por evitar que Rodgers huyera, te ascienden a teniente.
+pln A partir de ese momento eres libre para acostarte con su mujer con total libertad.
+proc final_loc
+end
+
+:91
+proc page_number
+pln El teniente tiene todo el derecho del mundo a querer borrarte del mapa. No hay nada como que intenten asesinarte para meditar sobre la vida que has llevado hasta ese momento. Y lo que ves al recordarla te deprime; y cuando estás deprimido te emborrachas.
+pln - Mátame si quieres, Winslow, pero yo me voy de cañas.
+pln - Pero inspector Jim, está de servicio.
+pln Lo dice como si hubieras insultado a su madre, qué tipo más raro.
+pln - No te preocupes - tratas de tranquilizarlo - a las putas las controlan sus chulos, y a estos, otro chulos. Es así como se mantiene el orden.
+pln - Y a los carteristas, ¿quién los controla?
+pln - ... Si tanto te inquieta esa cuestión, patrulla tú por mí. Yo necesito un par de toneles de whisky o pronto estaré escuchando música country y haciendo trabajos manuales con una foto de Dolly Parton. Me largo.
+pln Y hacia el bar más cercano te vas. Winslow te sigue, quién sabe si por camaradería, por pena o porque sigue queriendo matarte.
+pln Os sentáis en la barra. Siendo mediodía, el local está hasta los topes de marineros que finiquitan sus últimas horas en tierra, aprovechando la vida.
+pln Pronto el alcohol suelta tu lengua. Empiezas a hablar con Winslow de cosas sin importancia como el trabajo o el tiempo que hará el día siguiente, pero el sexto whisky derriba cualquier muro que hubieras levantado alrededor de tus sentimientos.
+pln - Winslow, ¿tienes amigos?
+pln - Antes me juntaba con un tipo enclenque, con gafas y con gustos musicales algo extraños, creo que le gustaba la polka. El caso es que un día le metieron en la cárcel acusado de terrorismo psicológico y desde entonces no he vuelto a saber de él.
+pln - Pues yo no he tenido ni siquiera eso. Me he pasado la vida viviendo el día a día, así eché a perder mi matrimonio. Nunca pensé que diría esto, pero echo de menos volver a casa y encontrarme a mi sonriente esposa con mis pantuflas en la mano y la cena servida, pero mi ex me odia y el resto de mujeres no me toman en serio.
+pln - Creo que no te dejó únicamente por que vivieras el día a día Jim. - Te interrumpe sorprendido de encontrarse ante un machista. Se supone que todos fueron erradicados medio siglo antes.
+pln - Winslow, sé que parece una locura pero... ¿quieres casarte conmigo?
+pln Siempre se ha dicho que beber no es bueno. No solo por los accidentes que luego puedes tener sino porque al día siguiente, aparte de con resaca, puedes despertarte con un uniforme de los marines o un vestido de novia, como en el caso de Winslow, que borracho como un príncipe de Mónaco aceptó tu propuesta.
+pln Su fe inquebrantable en los votos matrimoniales le hizo desistir de intentar anular la boda. Os vais a vivir juntos. Dentro de un par de años te dejará por el lechero, pero mientras tanto, disfruta.
+proc final_loc
+end
+
+:93
+proc page_number
+pln Algo va mal. Tus órganos internos deberían formar parte de la decoración del muro contra el que te has estampado, formando un gore-mural que haría las delicias del Conde Drácula; sin embargo, tienes ganas de abrir los ojos. Aunque no sirve de mucho. La oscuridad te rodea.
+pln Intentas andar, pero ni ves, ni sientes nada, así que no estás muy seguro de si te has movido del sitio. Por si acaso estás haciendo un esfuerzo inútil, te detienes. ¿O ya estabas parado? La situación comienza a afectar a tu juicio de forma preocupante.
+pln Recuerdas entonces que los locos nunca admiten estarlo. Así que en un alarde de lógica aplastante, comienzas a admitirlo.
+pln - Estoy loco. Estoy loco. Estoy loco -. Piensas con fuerza - Estoy loco. Estoy loco. Estoy loco… Qué suerte tiene ese elefante rosa, él no está loco, pero yo sí…
+pln De pronto se hace la luz. A pocos metros frente a ti, se ha iluminado un cartel que dice "Purgatorio". Bajo él, una puerta hacia la que te diriges, esta vez sí, a toda velocidad.
+pln Tras ella se extiende una sala inmensa cuyas paredes no puedes discernir. De alguna manera te recuerda a tu comisaría el día de San Patricio, atestada de gente disfrazada de las cosas más extrañas: romanos, egipcios, bomberos, pastores, gente en ropa interior, etruscos, monjas…
+pln Te abres paso entre ellos. Charlan tranquilamente con ligeros susurros en infinidad de lenguas. Caminas tan distraído que no te percatas de que estás a punto de chocar con un hombre que fuma en pipa.
+pln - Perdone, señor…
+pln - Holmes. Sherlock Holmes. - responde cortésmente. - Para servirle a usted y a la Reina.
+pln - ¿Sherlock Holmes? ¡¡Si tú no existes!!
+pln - Elemental, ya no. De lo contrario no estaría aquí esperando mi turno. Yo no tendría que estar aquí, debería estar ahí arriba resolviendo crímenes acompañado de una atractiva rubia y un voluntarioso italo-americano…
+pln - Un momento, un momento, ¿qué turno?
+pln - No me digas más. Eres nuevo. Y no solo eso. Mataste a un hombre, tu jefe seguramente, robaste la ranchera del Sheriff Lobo y te estrellaste contra una pared por saltarte un semáforo…
+pln - Caray - resoplas asombrado - ¿Todo eso lo ha deducido por mi aspecto?
+pln - No, es que en esa tele de ahí ponen las últimas muertes. Hace más amena la espera.
+pln Echas un vistazo hacia donde señala. Una enorme pantalla de plasma suspendida sobre vuestras cabezas, muestra como un preso se agacha en la ducha para coger una pastilla de jabón y… bueno, cae al suelo y se rompe la cabeza.
+pln - Pronto lo verás cruzar la puerta - te comenta Holmes - Será mejor que cojas un número.
+pln Agradecido por la ayuda, te despides del detective y caminas hacia una columna, dos kilómetros más allá de donde estás, de la cual pende el dispensador de tickets.
+pln Miras el papel con curiosidad. Te ha tocado el número tres. Te acercas a un agricultor del medioevo que espera a tu lado y le preguntas por qué número va.
+pln - Por el 2 - responde cabizbajo.
+pln Al fin algo de suerte. Dentro de nada, podrás… podrás…
+pln - Oiga, para qué sirve el número - vuelves a preguntar al labriego.
+pln - ¿Ves ese escritorio de allí? - señala hacia tu derecha, más allá de un grupo de vikingos que pasa el tiempo chocando sus cabezas, un miembro del PC instando a las masas a la rebelión contra la clase dominante del purgatorio, y un puñado de personas más sin interés, oficinistas o algo así - Allí te dirán hacia dónde tienes que ir. Si hacia arriba o hacia abajo.
+pln - El siguiente es el mío - le informas con orgullo. - Estoy impaciente por salir de aquí.
+pln El agricultor te mira con desprecio. Tanto, que no puedes reprimir el preguntarle.
+pln - ¿Qué número tiene?
+pln - El 2.345.654
+pln -… Ánimo que ya queda menos.
+pln - Lo bueno es que no me esperan en casa a la hora de comer
+pln El tres, anuncia una poderosa voz, que sale de no sabes muy bien dónde. Tras despedirte de tu nuevo amigo, te diriges hacia la mesa. Tras ella, un venerable anciano, de blancos ropajes y larga barba, garabatea algo en su cuaderno.
+pln - Hey, yo te conozco. ¡Tú eres San Pedro! - gritas emocionado al encontrarle por fin una utilidad a tus clases de catequesis.
+pln - Te equivocas, soy San Fulgencio patrón de… No se me permite decir palabrotas. Estoy al mando del purgatorio. San Pedro está enchufado ahí arriba - te dice señalando hacia el inexistente techo. - Toma asiento, por favor.
+pln - Permite que te felicite por la eficacia con la que llevas el chiringuito.
+pln - Normalmente la gente pasa décadas aquí, esperando su turno - te comenta San Fulgencio. - pero para que no haya páginas y más páginas del tipo "Y Jim esperó su turno", te voy a hacer la ficha ahora mismo. Además, como has muerto tan pronto, no sabemos muy bien donde enviarte. Tú eliges donde quieres vivir eternamente. ¿Qué te parece?
+pln - Que incluso en este libro, solo vas a alguna parte si tienes enchufe…
+btn 96, Si elijes ascender a los cielos y compartir la gloria del Señor, coge tus alas y elévate hacia la nube 96.
+btn 100, Si el ácrata, lujurioso, pecador y usuario del eMule que llevas dentro, te anima a descender a los infiernos, lleva en la maleta protección solar nivel "El infierno está que arde", hacia la hoguera 100.
+proc intermediate_loc
+end
+
+:96
+proc page_number
+pln El paraíso. Un lugar repleto de nubes donde los que pasaron sus vidas en el conservatorio pueden encontrarle un sentido a tantos años desperdiciados, tocando la lira sin que nadie les tire un cubo de agua a la cabeza.
+pln Un instante antes, estabas estrechando la mano de San Fulgencio, y ahora, te encuentras en el hall de lo que parece ser un hotel de cinco estrellas. Un recepcionista de rostro rubicundo y porte distinguido te sonríe.
+pln - Sí, ¿qué desea?
+pln - Verá, acabo de llegar y…
+pln - No me diga más - te interrumpe - Estoy aquí para ayudarle. Mi nombre es Carl y seré su orientador en el cielo. Pero venga, acompáñeme.
+pln Cogidos de la mano, salís al exterior. Una inmensa y florida pradera, salpicada de pequeños edificios, se extiende hasta el infinito. Comenzáis a pasear por el camino de baldosas amarillas, que según te comenta Carl, comunica con cada rincón del cielo y con un lugar llamado Kansas, que no te aconseja visitar.
+pln Con voz serena y melindrosa, te va informando sobre todo lo que ves. La mansión de Gandhi, el pabellón de deportes donde entrena el Manchester United, estatuas dedicadas a personas con extraños nombres como Mickey Rooney, Stevie Wonder o Margaret Thatcher…
+pln Como buen policía, enseguida te percatas de que pasa algo raro.
+pln - ¿Dónde están las mujeres? - preguntas con cierto interés, pues en todo el rato que habéis estado paseando, no os habéis cruzado con ninguna. Sin embargo, estás harto de ver a seguidores de ZZ Top por todos los rincones.
+pln - Tienen su propio cielo. ¿No pensarás que el paraíso para ellas es estar rodeadas de por vida de babosos como usted, verdad?
+pln - Así que esto es como uno de esos vagones de tren japoneses. - Te lamentas abatido.
+pln - Más o menos, solo que no hay nadie que te coja del culo y empuje hacia dentro… si tú no quieres - añade mientras te guiña un ojo.
+pln Aquello es intolerable. Si hubieras escogido el infierno, ahora mismo te rodearían decenas de mujeres con pechos generosos susurrándote al oído "<span lang="en">Master of puppets</span>", dispuestas a afinar tu guitarra con sus artes orales.
+pln - ¿Dónde puedo presentar una queja?
+pln - Detrás de la urbanización de Michael Landon, está la oficina de Santa Paciencia. Ella lo tramitará. Pero te sugiero que antes termines el tour por el cielo. Tienes toda la eternidad para quejarte, pero solo me tendrás unos minutos a mí.
+btn 99, Si la ausencia de féminas obceca tu mente y no quieres saber nada de otra cosa que no sea reposar por toda la eternidad en el regazo de una morena explosiva, descubre cómo es la burocracia celestial en el 99.
+btn 98, Si quieres aprovechar hasta el último segundo de la presencia del atractivo Carl, que no te pillen los de ExxonMobil, en el 98
+proc intermediate_loc
+end
+
+:98
+proc page_number
+pln - Me lo he pensado mejor - reflexionas - ¿Quién quiere a las mujeres?
+pln - Tú eres de los míos - sonríe con picardía el guía. - Ahora, te voy a enseñar lo mejor.
+pln Atravesáis los jardines de la felicidad eterna y bajáis la pendiente del pecado irredento, hasta llegar a las puertas de una inmensa factoría de acero, toda pintada de blanco. Las enormes puertas de aluminio se abren, dejando al descubierto un paisaje de metal fundido, calor, llamas y los cuerpos sudorosos de centenares de obreros. Carl te coge del brazo y te introduce en el caluroso recinto.
+pln - Son los trabajadores más musculosos del mundo. Traídos directamente de las mejores fábricas de Norteamérica.
+pln Sus ojos brillan mientras te explica el cometido de semejante lugar. Algo tan extraordinario que es imposible explicar con palabras.
+pln - Y son muy, muy machos - añade al borde del paroxismo. - Yo me voy porque aquí está prohibido pecar, pero te dejo para que hagas… tú ya sabes.
+pln Ves a Carl alejarse al trote hasta perderse en la distancia. En el interior, los obreros comienzan a cantar…
+pln - <span lang="en">People asked me why I never find a place to stop and settle down, down, down</span>.
+pln Te lanzas de cabeza hacia dentro, mientras las puertas se cierran lentamente.
+pln Pasas el resto de la eternidad, forjando metal y rememorando los grandes éxitos de ABBA, junto a los cuerpos más fornidos y untados de aceite que se puedan encontrar en este u otros mundos.
+image img/7.jpg|Trabajadores en el taller
+proc final_loc
+end
+
+:99
+proc page_number
+pln A toda velocidad corres hacia el edificio de reclamaciones. La puerta está abierta y no parece haber nadie esperando, así que te adentras en el hall, donde te recibe una preciosa mujer haciendo crucigramas.
+pln Te acercas a su mesa. Ni siquiera alza la vista, continúa con el pasatiempo, como si tal cosa. Toses incómodamente. Parece que funciona, porque lentamente levanta sus ojos de jade, hasta clavarlos en tu mirada.
+pln - No me lo digas, otro que se queja porque no hay mujeres.
+pln - ¿Quién quiere otras chicas teniéndote a ti, preciosa?- siempre has sido conocido por aprovechar cada oportunidad.
+pln - Como le digo a todo el que intenta ligar conmigo, y son muchos, usa las manos que para eso Dios te dio dos. Tramitaremos tu petición y bla bla bla. ¡El siguiente! - grita antes de pasar de ti de nuevo.
+pln Decepcionado, sales del edificio sin rumbo fijo. Sin mujeres en las que pensar día y noche, aprovechas el tiempo para superar el arte de Miguel Ángel, la inteligencia de los físicos cuánticos y la lírica de los mejores poetas. Eso sí, te aburres como una ostra.
+proc final_loc
+end
+
+:100
+proc page_number
+pln El infierno es como protagonizar una película post-apocalíptica, donde la guerra nuclear ha diezmado a la población y los supervivientes luchan ferozmente por los últimos recursos de la Tierra, solo que no ves a Mel Gibson por ninguna parte.
+pln El panorama es desolador. Ante ti se extiende un valle infinito cubierto de cenizas, salpicado con volcanes de fuego por doquier y poblado por multitud de hombres trajeados obligados a estudiar ética profesional por toda la eternidad, además de todo tipo de criaturas: Janice Joplin siendo obligada a escuchar sus discos, Ozzy Osbourne comiendo a desgana un gran plato de espinacas, uno de los Jackson 5 frotándose enérgicamente con una pastilla de jabón lagarto y a lo lejos te parece ver a Ike Turner recibiendo una paliza de un espantapájaros.
+pln Pero lo que más te impresiona, es una masa uniforme que contemplas descender de una colina en el este. Entornas los ojos y te parece distinguir multitud de cabezas y otros miembros: son hombres, y parecen dispuestos a embestir a otro grupo de ellos, que los esperan al pie de la colina.
+pln Curioso, te acercas al lugar, pero te mantienes a una distancia prudencial. El cielo… bueno, el techo retumba con estruendo. Comienza a sonar con gran fuerza <span lang="en">Pinball Wizard</span> y casi en ese mismo instante, elevándose sobre la canción de Los <span lang="en">Who</span>, comienza con fuerza arrolladora <span lang="en">The Trooper</span>, Los dos bandos se golpean con sus guitarras a ritmo de sus respectivas canciones. Estás presenciando una genuina pelea de bandas.
+pln Cuando Bruce Dickinson arranca de un bocado el piercing de Pete Townshed, te das cuenta que has tenido suficiente. Te dispones a marcharte, cuando un espectacular rift de guitarra paraliza a los luchadores. Una montaña emerge del suelo, y en la cima, Brian May, que se une al combate con sus acólitos reductores de cabezas, en busca de nuevas presas. Los que antes se machacaban las cabezas con Stratocasters, huyen despavoridos en todas direcciones. Siguiendo su ejemplo, te internas en un recóndito camino de piedra que te lleva hacia el sur.
+pln Tras más de dos horas de caminata por el lugar más horrible del universo, sin contar la sección de caballeros de Sears, te ha entrado hambre. Donde quiera que mires, solo encuentras ceniza y roca fundida. Incluso los pocos árboles que crecen en tan pobre sustrato, dan como fruto orondas piezas de ceniza.
+pln Un olor familiar sacude tus glándulas olfativas. Huele a manzana... Sigues el rastro oloroso, hasta una pequeña casita rural. No te equivocabas, en una de sus ventanas se enfría una deliciosa tarta de manzana, con un aspecto que dice "Cómeme y le haré el amor a tus papilas gustativas"
+pln Sabes que está mal robar pero es muy probable que sea lo único comestible en kilómetros y no quieres morir de hambre precisamente ahora.
+btn 102, Si robas el pastel y sacias tu apetito, ponte el antifaz de caco en el 102
+btn 103, Si reprimes la tentación, deberías haber elegido el cielo, mira a ver si en el 103 lo encuentras.
+pln Si te preguntas cómo Jim teme morir, si ya está muerto, no le des más vueltas, simplemente es estúpido.
+proc intermediate_loc
+end
+
+:102
+proc page_number
+pln Con sigilo, vas acercándote poco a poco a la ventana, controlando la respiración para que ni el más leve susurro, delate tu posición. Estás a un par de metros de la tarta. De un salto cubres la distancia entre la roca tras la que te ocultabas, y la pared de la casa.
+pln Lentamente alzas los brazos hacia la ventana. Solo te separan un par de centímetros y…
+pln - Aaaaaauuuuuhhh - gritas ruidosamente.
+pln Algo te ha golpeado en los nudillos.
+pln Escuchas como se abre la puerta de la casa. Te incorporas como puedes, para salir huyendo, pero un humanoide rojo descomunal se interpone en tu camino. La has hecho buena es…
+pln - El diablo - ruge con una voz de ultratumba. - Y ahora vas a comprobar lo que hago a los ladrones.
+pln - Eh, un momento - le interrumpes - esto es el infierno, si hago algo malo, me tendrían que dar una recompensa.
+pln - Esto es el infierno, no el sistema judicial español. Aquí si me la haces, la pagas.
+pln - ¿Ah sí? - replicas con cierta chulería -¿Y qué vas a hacer? ¿Matarme?
+pln El comentario parece enfurecerle más, pues sus cavidades nasales empiezan a emitir espesas nubes de humo.
+pln - Menos cachondeo. ¿Ves este tridente? - es el más grande y puntiagudo que has visto nunca -. Échale imaginación…
+pln A tu mente afloran imágenes de las múltiples barbacoas a las que asististe en vida, aquella vez que jugaste a ponerle la cola al burro en el cumpleaños de tu amigo mexicano José Eduardo Ruiz Pontoso y lo que le hacía Drácula a sus enemigos. No debe de ser muy agradable. No te queda otra que fingir sincero arrepentimiento. Durante diez interminables minutos haces la pelota al diablo, hasta que este cede.
+pln - Está bien, está bien. Te daré una oportunidad. Nos jugaremos tu empalamiento. Tú elijes a que juego.
+image_caption = "El loft del diablo"
+image img/8.jpg|Habitación rural acogedora
+image_caption = ""
+btn 104, Si eras tan flexible como una gimnasta rumana, prueba con el Twister en el 104
+btn 105, Si quieres sacarle partido a tus dotes detectivescas, rétale al Cluedo en el 105.
+proc intermediate_loc
+end
+
+:103
+proc page_number
+pln En tu hombro izquierdo aparece de pronto una réplica en miniatura de ti mismo, disfrazado de diablillo que te susurra al oído que robes el pastel, que nadie se enterará. En el hombro derecho… bueno, no hay nadie, pero eres policía, no corrupto, y el deber te impide cometer un crimen, aunque sea tan leve como privar a alguien de su merienda.
+pln Sigues tu camino. Los días pasan y continúas sin encontrar nada que comer ni beber. Las fuerzas te fallan y la voluntad por dar un paso más se evapora como las gotas de rocío bajo el tórrido sol del desierto. Una colina más y abandono, te dices sin esperanza alguna.
+pln Sin embargo, se obra el milagro. Tras el montículo, se extiende un bello parque repleto de chicas con pechos inflamados, retozando entre ellas. Cuando te ven, te llaman con lascivos gestos. Rápidamente te lanzas al desenfreno sexual, pero la carencia de alimentos hace que no tengas fuerza para levantar la lanza con la que participar en la erótica justa.
+pln Eres impotente en un mar de lujuriosas mujeres. ¿Existe peor infierno que ese?
+proc final_loc
+end
+
+:104
+proc page_number
+pln Entras al salón de la casa. En el suelo está desplegado ya el plástico con los círculos de colores. Rápidamente os ponéis manos a la obra. La partida se torna apasionante y tu oponente hace gala de una flexibilidad impensable en un cuerpo tan enorme e hinchado como el suyo.
+pln Se van sucediendo las tiradas y el momento final se acerca. Es el turno del diablo. Permanece en un precario equilibrio sobre su mano izquierda y su pie derecho, contigo a su lado. Hace girar la rueda. Mano derecha a círculo rojo.
+pln Es tu oportunidad. Le empujas ligeramente, lo justo para que pierda el equilibrio y caiga sobre el tridente, que se hunde veloz en su rojo pecho, atravesándolo de parte a parte como un pincho de chorizo.
+pln Has acabado con el jefe del infierno. Cuando la noticia se extiende, te convierten en el nuevo rey del inframundo, donde impondrás un reinado del terror, repleto de conejos y tartas de chocolate.
+proc final_loc
+end
+
+:105
+proc page_number
+pln De algo deben servir tantos años de policía, piensas para ti delante del tablero de juego, mientras el diablo prepara un café, que no tarda en llevar a la mesa, acompañado con unas ricas pastas danesas que degustas con deleite.
+pln - Comencemos - sugiere melosamente mientras das cuenta del rancio cortado -. ¿Te importa si empiezo yo?
+pln El juego es suyo, la casa es suya y el tridente que descansa junto a su silla, también es suyo, así que le dejas que abra el juego.
+pln - Mataron al barón en la biblioteca con un pisapapeles - describe mecánicamente. - Has perdido.
+pln Te levantas de un salto de la silla. Aquello es intolerable.
+pln - ¡¡¿Cómo lo sabes si ni siquiera has tirado los dados?!!
+pln - Porque lo maté yo - grita antes de que sus carcajadas se incrusten en tus oídos.
+pln Estás acabado. Tendrías que haber propuesto el ajedrez o el teto. Acorralado contra la chimenea, lo único que esperas es que el tridente que se dirige a tu estómago, esté desinfectado.
+pln En cuanto entra en contacto con tu piel, pierdes el conocimiento.
+pln Despiertas en la sala de un hospital, escayolado de la cabeza a los pies. Fue todo una pesadilla. El reto al diablo, la casa, el infierno, San Fulgencio… bueno el accidente sí que fue real, pero al menos estás vivo y a salvo. O al menos eso es lo que crees, porque de postre hay… tarta de manzana.
+proc final_loc
+end
+
+:comment
+pln <h2>Comentario del autor</h2>
+pln Primer libro que escribí de principio a fin, basado en los famosos libros de Elige tu propia aventura, de cuya colección bien me pude leer cerca de 50 títulos. Escrito en las noches de invierno de 2007 con la intención de impresionar a una chica, me vino muy bien usar árboles binarios para la gestión de las distintas elecciones que puede hacer el lector. Al ser una obra primeriza, la historia se dispersa demasiado, con más finales de los que sería deseable. En cualquier caso, leyendo las distintas ramas narrativas, se puede apreciar un intento de que todo estuviera relacionado, repitiéndose diversas situaciones desde distintos puntos de vista según la elección escogida.
+pln En un primer momento fue publicado en un <a href="https://jimdelespacioexterior.blogspot.com/" target="_blank">blog</a>, aprovechando la simbiosis entre la narrativa interactiva y el hipertexto. Este llegó a recibir visitas de todas partes del mundo, destacando su aparición entre los hilos de Taringa y Menéame, aunque he de decir que tuvo más impacto en la audiencia argentina que en la española. Fue nombrado, algo que nunca pensé, en más de un estudio universitario sobre ficción interactiva con lo que se puede decir que, al menos académicamente hablando, toqué techo con mi primera obra.
+btn start, Atrás
+end
+
+:acknowledgments
+pln <h2>Agradecimientos</h2>
+pln A Chuck Norris, que escribió este libro-juego mientras se preparaba un sándwich y permitió que le pusiera mi nombre.
+pln A Iker Jiménez, por ceder su nombre desinteresadamente y sin tener constancia de ello.
+pln A los amantes de los libro-juegos, los cuatro o cinco que quedan.
+pln A la gente de la SGAE, que defenderá los derechos de este librojuego para evitar que sea copiado y vendido en formatos de mala calidad, para posteriormente atormentarme por haber usado nombres registrados que no, repito no sabía que lo estuvieran.
+pln A mis lectores, las mentes más preclaras e inteligentes del país y del universo
+pln A the virgen of Guadalupe, the christ of Medinacelli, the mother theresa de Calcuta, a san Judas Tadeo, a Felipe Juan Froilán of all the saints y a don Pimpón, donde quiera que esté, espero que le haya gustado.
+pln Y finalmente: Gracias a ti 😉
+btn start, Atrás
+end

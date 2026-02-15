@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ifindex version="1.0" xmlns="http://babel.ifarchive.org/protocol/iFiction/">
+	<story>
+		<identification>
+			<ifid>B63135C1-606B-40A1-AB70-D8AA044C861D</ifid>
+			<format>urqw</format>
+		</identification>
+		<bibliographic>
+			<title>Jim del Espacio Exterior</title>
+			<author>Daniel Rodríguez Rivero y Nikita Tseykovets</author>
+			<language>es</language>
+			<firstpublished>2026-02-16</firstpublished>
+			<genre>Humor</genre>
+			<group>URQ</group>
+			<description>Eres Jim, miembro de la Espacio Exterior 1, la comisaría de policía más estrafalaria de toda la galaxia. Tu turno está a punto de terminar cuando el jefe te llama su despacho. El universo te necesita. ¿Estás preparado para aceptar la llamada?<br/>Esta es la versión informática del libro juego al estilo de los clásicos de "Elige tu propia aventura", pero sin ninguna relación con estos, en el que deberás escoger entre distintas opciones para llevar a buen puerto al protagonista y no morir en el intento.<br/>En este juego encontrarás muchas y muy variadas aventuras que podrás vivir con las peripecias del policía más duro de toda la galaxia: Jim, sin apellido conocido por el momento. Visitarás planetas exóticos, amarás a seres que en cualquier otro lugar te harían vomitar y te reirás, o eso espero, con las ocurrencias más estúpidas.<br/>Tú serás el responsable de que termine la jornada de la manera más satisfactoria posible. Te corresponde a ti tomar las decisiones. ¡Buena suerte!<br/>Basado en la segunda edición: Rodríguez Rivero, Daniel. Jim del Espacio Exterior / Daniel Rodríguez Rivero. — Segunda edición. — D2R Ediciones, octubre 2023. — 141 p. — ISBN 979-8-86297-702-8.<br/>Portado a UrqW: Nikita Tseykovets<br/>El juego cuenta con música de Jason Shaw en Audionautix.com</description>
+		</bibliographic>
+		<contacts>
+			<url>https://urqw.github.io/UrqW/?id=jim_from_outer_space</url>
+			<authoremail>tseikovets@rambler.ru</authoremail>
+		</contacts>
+		<colophon>
+			<generator>UrqW Game Template</generator>
+			<originated>2026-02-15</originated>
+		</colophon>
+	</story>
+</ifindex>

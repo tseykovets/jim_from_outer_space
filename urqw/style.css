@@ -1,0 +1,33 @@
+/**
+ * This file is part of the Jim from Outer Space game.
+ * Copyright (C) 2026 Nikita Tseykovets (tseikovets@rambler.ru)
+ * SPDX-License-Identifier: CC-BY-NC-SA-4.0
+ */
+
+#game h1,
+#game h2,
+#game .bold_centered {
+	text-align: center;
+	font-weight: bold;
+}
+
+#game h1 {
+	font-size: 2em;
+}
+
+#game h2 {
+	font-size: 1.5em;
+}
+
+#game .page_number {
+	text-align: right;
+}
+
+#game .read_page {
+	color: #4f4066;
+}
+
+#game .read_marker {
+	font-size: 0.66em;
+	font-weight: normal;
+}

@@ -2,7 +2,7 @@
   "name": "jim_from_outer_space",
   "version": "1.0.0",
   "description": "Game \"Jim del Espacio Exterior\" for UrqW text-based game engine.",
-  "main": "node_modules/urqw/index.html?id=urqw&debug=1",
+  "main": "node_modules/urqw/index-dev.html?id=urqw&debug=1",
   "scripts": {
     "build": "node scripts/build.js",
     "docs": "node scripts/docs.js",
@@ -11,7 +11,7 @@
     "manifest": "node scripts/manifest.js",
     "release": "node scripts/release.js",
     "postinstall": "cd node_modules/urqw && npm install && npm run gen-docs",
-    "start": "npx live-server --open=node_modules/urqw/index.html?debug=1#urqw --watch=node_modules/urqw/quests/urqw.zip",
+    "start": "npx live-server --open=node_modules/urqw/index-dev.html?debug=1#urqw --watch=node_modules/urqw/quests/urqw.zip",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
